@@ -1,7 +1,5 @@
 package com.cloudapps.practica1.model;
 
-import java.util.List;
-
 public class Book {
  
     private Long id;

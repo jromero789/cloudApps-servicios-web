@@ -1,0 +1,17 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+</head>
+<body>
+	<form action="/review/newReview" method="post">
+		<p>User:</p>
+		<input type='text' name='user' value='{{#user}}{{.}}{{/user}}'/>
+		<p>Coment:</p>
+		<textarea name='comment' rows=5 cols=40></textarea>
+        <p>Rating:</p>
+        <input type='number' name='rating' min="0" max="5"/>
+
+		<input type='submit' value='Save'/>
+	</form>
+</body>
+</html>

@@ -13,10 +13,11 @@
 	<a href="/">Back</a>
 
 	<h1>Reviews</h1>
+	<a href="/review/new">Create a review</a>
 	{{#reviews}}
 	<p>Rating: {{rating}}</p>
 	<p>Comment: {{comment}}</p>
-	<a href="/review/{{book.id}}/{{id}}/delete">Delete review}</a>
+	<a href="/review/{{book.id}}/{{id}}/delete">Delete review</a>
 	<br>
 
 	{{/reviews}}

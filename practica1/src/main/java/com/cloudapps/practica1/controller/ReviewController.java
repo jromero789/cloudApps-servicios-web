@@ -8,21 +8,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.cloudapps.practica1.model.Review;
 import com.cloudapps.practica1.service.ReviewService;
-
+import com.cloudapps.practica1.service.UserSession;
 
 @Controller
 public class ReviewController {
     
 	@Autowired
 	private ReviewService reviewService;
+
+	@Autowired
+	private UserSession userSession;
 	
-	
-	@PostMapping("/review/new")
+	@GetMapping("/review/new")
+	public String newReviewForm(Model model) {
+
+        model.addAttribute("user", userSession.getUser());
+
+		return "new_review";
+	}
+
+	@PostMapping("/review/newReview/{bookId}")
 	public String newReview(Model model, Review review, @PathVariable long bookId) {
 
 		reviewService.save(review, bookId);
 
-		return "redirect:/book/" + bookId;
+		userSession.setUser(review.getUser().getName());
+		userSession.incNumPosts();
+
+		model.addAttribute("numPosts", userSession.getNumPosts());
+
+		return "saved_review";
 	}
 
 	
