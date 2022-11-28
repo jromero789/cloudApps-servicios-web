@@ -1,9 +1,16 @@
 <html>
-  <head>
-      <meta charset="UTF-8">   
-  </head>
 <body>
+	<p>Title: {{book.title}}</p>
+	<p>Summary: {{book.summary}}</p>
+	<p>Author: {{book.author}}</p>
+	<p>Publisher: {{book.publisher}}</p>
+	<p>Publication Year: {{book.publicationYear}}</p>
 
-    
+	
+	<a href="/book/{{book.id}}/delete">Delete book</a>
+	
+	<br>
+	
+	<a href="/">Back</a>
 </body>
 </html>

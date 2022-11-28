@@ -1,9 +1,22 @@
 <html>
-  <head>
-      <meta charset="UTF-8">   
-  </head>
+<head>
+	<meta charset="UTF-8"/>
+</head>
 <body>
+	<form action="/book/new" method="post">
+		<p>Title:</p>
+		<input type='text' name='title'/>
+		<p>Summary:</p>
+		<textarea name='summary' rows=5 cols=40></textarea>
+    <p>Author:</p>
+		<input type='text' name='author'/>
+    <p>Publisher:</p>
+		<input type='text' name='publisher'/>
+    <p>Publication Year:</p>
+		<input type='text' name='publicationYear'/>
 
-    
+
+		<input type='submit' value='Save'/>
+	</form>
 </body>
 </html>
