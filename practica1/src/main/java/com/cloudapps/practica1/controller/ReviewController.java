@@ -19,15 +19,16 @@ public class ReviewController {
 	@Autowired
 	private UserSession userSession;
 	
-	@GetMapping("/review/new")
-	public String newReviewForm(Model model) {
+	@GetMapping("/review/new/{bookId}")
+	public String newReviewForm(Model model, @PathVariable long bookId) {
 
         model.addAttribute("user", userSession.getUser());
+        model.addAttribute("book", reviewService.findByBookId(0));
 
 		return "new_review";
 	}
 
-	@PostMapping("/review/newReview/{bookId}")
+	@PostMapping("/review/new/{bookId}")
 	public String newReview(Model model, Review review, @PathVariable long bookId) {
 
 		reviewService.save(review, bookId);
