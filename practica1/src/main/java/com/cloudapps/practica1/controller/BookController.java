@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cloudapps.practica1.model.Book;
 import com.cloudapps.practica1.service.BookService;
-import com.cloudapps.practica1.service.UserSession;
+import com.cloudapps.practica1.service.ReviewService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,9 +18,8 @@ public class BookController {
     
 	@Autowired
 	private BookService bookService;
-	
 	@Autowired
-	private UserSession userSession;
+	private ReviewService reviewService;
 	
 
 	@GetMapping("/")
@@ -34,8 +33,6 @@ public class BookController {
 
 	@GetMapping("/book/new")
 	public String newBookForm(Model model) {
-
-		// model.addAttribute("user", userSession.getUser());
         
 		return "new_book";
 	}
@@ -44,11 +41,6 @@ public class BookController {
 	public String newBook(Model model, Book book) {
 
 		bookService.save(book);
-				
-		// userSession.setUser(book.getUser());
-		// userSession.incNumBooks();
-		
-		// model.addAttribute("numBooks", userSession.getNumBooks());
 
 		return "saved_book";
 	}
@@ -59,6 +51,7 @@ public class BookController {
 		Book book = bookService.findById(id);
 
 		model.addAttribute("book", book);
+		model.addAttribute("reviews", reviewService.findByBookId(id));
 
 		return "show_book";
 	}

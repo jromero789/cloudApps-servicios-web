@@ -8,9 +8,21 @@
 
 	
 	<a href="/book/{{book.id}}/delete">Delete book</a>
-	
 	<br>
 	
 	<a href="/">Back</a>
+
+	<h1>Reviews</h1>
+	{{#reviews}}
+	<p>Rating: {{rating}}</p>
+	<p>Comment: {{comment}}</p>
+	<a href="/review/{{book.id}}/{{id}}/delete">Delete review}</a>
+	<br>
+
+	{{/reviews}}
+	
+	{{^reviews}}
+	<p>No reviews yet.</p>
+	{{/reviews}}
 </body>
 </html>

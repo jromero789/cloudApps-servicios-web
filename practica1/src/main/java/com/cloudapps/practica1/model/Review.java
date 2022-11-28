@@ -3,6 +3,7 @@ package com.cloudapps.practica1.model;
 public class Review {
     
     private Long id;
+    private Long bookId;
     private User user;
     private String comment;
     private int rating;
@@ -27,6 +28,14 @@ public class Review {
         this.id = id;
     }
 
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
+    }
+    
     public User getUser() {
         return user;
     }

@@ -10,21 +10,18 @@ public class Book {
     private String author;
     private String publisher;
     private int publicationYear;
-    private List<Review> reviews;
 
     public Book() {
 
 	}
 
-    public Book(String title, String summary, String author, String publisher, int publicationYear,
-            List<Review> reviews) {
+    public Book(String title, String summary, String author, String publisher, int publicationYear) {
         super();
         this.title = title;
         this.summary = summary;
         this.author = author;
         this.publisher = publisher;
         this.publicationYear = publicationYear;
-        this.reviews = reviews;
     }
 
 
@@ -75,14 +72,5 @@ public class Book {
     public void setPublicationYear(int publicationYear) {
         this.publicationYear = publicationYear;
     }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
     
 }
