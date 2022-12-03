@@ -12,3 +12,7 @@
 
 ## Github práctica:
 - https://github.com/jromero789/cloudApps-servicios-web
+
+## Notes
+- http://localhost:8080/v3/api-docs.yaml
+- mvn verify to generate api-docs.html
