@@ -2,13 +2,24 @@ package com.cloudapps.practica2.review;
 
 import com.cloudapps.practica2.user.User;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+
+@Entity
 public class Review {
     
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long bookId;
-    private User user;
     private String comment;
     private int rating;
+
+    @OneToOne
+    private User user;
     
     public Review() {
 

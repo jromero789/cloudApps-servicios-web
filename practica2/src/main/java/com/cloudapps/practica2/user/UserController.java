@@ -45,7 +45,7 @@ public class UserController {
 	public ResponseEntity<User> deleteUser(@PathVariable long id) {
 
 		User user = userService.findById(id);
-		if (user != null && user.getReviews() == null) {
+		if (user != null) {
 			userService.deleteById(id);
 			return ResponseEntity.ok(user);
 		} else {

@@ -5,20 +5,29 @@ import java.util.List;
 import com.cloudapps.practica2.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class User {
 
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String email;
     
-    @JsonIgnore
-    private List<Review> reviews;
 
-    public User(String name, String email, List<Review> reviews) {
+    public User(){
+
+    }
+    
+    public User(String name, String email) {
         super();
         this.name = name;
         this.email = email;
-        this.reviews = reviews;
     }
 
     public String getName() {
@@ -43,12 +52,5 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setId(List<Review> reviews) {
-        this.reviews = reviews;
     }
 }
