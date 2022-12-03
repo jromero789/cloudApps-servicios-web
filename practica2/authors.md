@@ -16,3 +16,4 @@
 ## Notes
 - http://localhost:8080/v3/api-docs.yaml
 - mvn verify to generate api-docs.html
+- https://api.postman.com/collections/1188375-7e38162d-e7a5-45f0-8266-f123a96f88b3?access_key=PMAT-01GKASJA64685E3SSKWY020XTW

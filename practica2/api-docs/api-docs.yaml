@@ -6,16 +6,7 @@ servers:
 - url: http://localhost:8080
   description: Generated server url
 paths:
-  /users:
-    get:
-      tags:
-      - user-controller
-      operationId: getUsers
-      responses:
-        "200":
-          description: OK
-          content: {}
-  /user/{id}:
+  /users/{id}:
     get:
       tags:
       - user-controller
@@ -46,11 +37,11 @@ paths:
         "200":
           description: OK
           content: {}
-  /reviews:
+  /users/:
     get:
       tags:
-      - review-controller
-      operationId: getReviews
+      - user-controller
+      operationId: getUsers
       responses:
         "200":
           description: OK
@@ -71,16 +62,31 @@ paths:
         "200":
           description: OK
           content: {}
-  /books:
-    get:
+    delete:
       tags:
-      - book-controller
-      operationId: getBooks
+      - review-controller
+      operationId: deleteReview
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
         "200":
           description: OK
           content: {}
-  /book/{id}:
+  /reviews/:
+    get:
+      tags:
+      - review-controller
+      operationId: getReviews
+      responses:
+        "200":
+          description: OK
+          content: {}
+  /books/{id}:
     get:
       tags:
       - book-controller
@@ -111,18 +117,11 @@ paths:
         "200":
           description: OK
           content: {}
-  /review/{id}:
-    delete:
+  /books/:
+    get:
       tags:
-      - review-controller
-      operationId: deleteReview
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+      - book-controller
+      operationId: getBooks
       responses:
         "200":
           description: OK

@@ -7,23 +7,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cloudapps.practica2.model.Book;
 import com.cloudapps.practica2.service.BookService;
 
 @RestController
+@RequestMapping("/books")
 public class BookController {
 
 	@Autowired
 	private BookService bookService;
 
-	@GetMapping("/books")
+	@GetMapping("/")
 	public Collection<Book> getBooks() {
 		return bookService.findAll();
 	}
 
-	@GetMapping("/book/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Book> getBook(@PathVariable long id) {
 		Book book = bookService.findById(id);
 
@@ -34,7 +36,7 @@ public class BookController {
 		}
 	}
 
-	// @PostMapping("/book")
+	// @PostMapping("/")
 	// public ResponseEntity<Book> createBook(@RequestBody Book book) {
 
 	// 	bookService.save(book);
@@ -42,7 +44,7 @@ public class BookController {
   	// 	return ResponseEntity.created();
 	// }
 
-	@DeleteMapping("/book/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Book> deleteBook(@PathVariable long id) {
 
 		Book book = bookService.findById(id);

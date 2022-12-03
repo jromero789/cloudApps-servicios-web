@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cloudapps.practica2.model.Review;
@@ -14,17 +15,18 @@ import com.cloudapps.practica2.service.ReviewService;
 
 
 @RestController
+@RequestMapping("/reviews")
 public class ReviewController {
     
 	@Autowired
 	private ReviewService reviewService;
 
-	@GetMapping("/reviews")
+	@GetMapping("/")
 	public Collection<Review> getReviews() {
 		return reviewService.findAll();
 	}
 
-	@GetMapping("/reviews/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Review> getReview(@PathVariable long id) {
 		Review review = reviewService.findById(id);
 
@@ -35,7 +37,7 @@ public class ReviewController {
 		}
 	}
 
-	// @PostMapping("/review")
+	// @PostMapping("/")
 	// public ResponseEntity<Book> createBook(@RequestBody Book book) {
 
 	// 	bookService.save(book);
@@ -43,7 +45,7 @@ public class ReviewController {
   	// 	return ResponseEntity.created();
 	// }
 
-	@DeleteMapping("/review/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Review> deleteReview(@PathVariable long id) {
 
 		Review review = reviewService.findById(id);
