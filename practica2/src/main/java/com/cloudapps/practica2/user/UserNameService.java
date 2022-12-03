@@ -7,17 +7,17 @@ import org.springframework.web.context.annotation.SessionScope;
 
 @Component
 @SessionScope
-public class UserService {
+public class UserNameService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserNameRepository userRepository;
 	
 
-	public Collection<User> findAll() {
+	public Collection<UserName> findAll() {
 		return userRepository.findAll();
 	}
 
-    public User findById(long id) {
+    public UserName findById(long id) {
 		return userRepository.findById(id).orElseThrow();
 	}
 
