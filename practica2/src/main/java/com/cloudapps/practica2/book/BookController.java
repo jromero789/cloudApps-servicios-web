@@ -17,17 +17,20 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
+	@Autowired
+	private BookMapper mapper;
+
 	@GetMapping("/")
-	public Collection<Book> getBooks() {
-		return bookService.findAll();
+	public Collection<BookDTO> getBooks() {
+		return mapper.toDTOs(bookService.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Book> getBook(@PathVariable long id) {
+	public ResponseEntity<BookDTO> getBook(@PathVariable long id) {
 		Book book = bookService.findById(id);
 
 		if(book != null){
-			return ResponseEntity.ok(book);
+			return ResponseEntity.ok(mapper.toDTO(book));
 		} else {
 			return ResponseEntity.notFound().build();
 		}
@@ -42,12 +45,12 @@ public class BookController {
 	// }
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Book> deleteBook(@PathVariable long id) {
+	public ResponseEntity<BookDTO> deleteBook(@PathVariable long id) {
 
 		Book book = bookService.findById(id);
 		if (book != null) {
 		bookService.deleteById(id);
-		return ResponseEntity.ok(book);
+		return ResponseEntity.ok(mapper.toDTO(book));
 		} else {
 		return ResponseEntity.notFound().build();
 		}
