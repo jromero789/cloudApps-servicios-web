@@ -1,7 +1,8 @@
-package com.cloudapps.practica2.model;
+package com.cloudapps.practica2.user;
 
 import java.util.List;
 
+import com.cloudapps.practica2.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class User {

@@ -1,4 +1,4 @@
-package com.cloudapps.practica2.controller;
+package com.cloudapps.practica2.review;
 
 import java.util.Collection;
 
@@ -10,27 +10,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cloudapps.practica2.model.User;
-import com.cloudapps.practica2.service.UserService;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/reviews")
+public class ReviewController {
     
-    @Autowired
-	private UserService userService;
+	@Autowired
+	private ReviewService reviewService;
 
 	@GetMapping("/")
-	public Collection<User> getUsers() {
-		return userService.findAll();
+	public Collection<Review> getReviews() {
+		return reviewService.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUser(@PathVariable long id) {
-		User user = userService.findById(id);
+	public ResponseEntity<Review> getReview(@PathVariable long id) {
+		Review review = reviewService.findById(id);
 
-		if(user != null){
-			return ResponseEntity.ok(user);
+		if(review != null){
+			return ResponseEntity.ok(review);
 		} else {
 			return ResponseEntity.notFound().build();
 		}
@@ -45,15 +43,14 @@ public class UserController {
 	// }
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<User> deleteUser(@PathVariable long id) {
+	public ResponseEntity<Review> deleteReview(@PathVariable long id) {
 
-		User user = userService.findById(id);
-		if (user != null && user.getReviews() == null) {
-			userService.deleteById(id);
-			return ResponseEntity.ok(user);
+		Review review = reviewService.findById(id);
+		if (review != null) {
+		reviewService.deleteById(id);
+		return ResponseEntity.ok(review);
 		} else {
-			return ResponseEntity.notFound().build();
+		return ResponseEntity.notFound().build();
 		}
 	}
-
 }

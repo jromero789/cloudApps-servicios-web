@@ -1,4 +1,4 @@
-package com.cloudapps.practica2.service;
+package com.cloudapps.practica2.user;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,8 +9,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
-import com.cloudapps.practica2.model.Review;
-import com.cloudapps.practica2.model.User;
+import com.cloudapps.practica2.review.Review;
 
 @Component
 @SessionScope

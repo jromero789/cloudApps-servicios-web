@@ -1,4 +1,4 @@
-package com.cloudapps.practica2.controller;
+package com.cloudapps.practica2.book;
 
 import java.util.Collection;
 
@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.cloudapps.practica2.model.Book;
-import com.cloudapps.practica2.service.BookService;
 
 @RestController
 @RequestMapping("/books")

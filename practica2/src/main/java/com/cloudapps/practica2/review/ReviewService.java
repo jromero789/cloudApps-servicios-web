@@ -1,4 +1,4 @@
-package com.cloudapps.practica2.service;
+package com.cloudapps.practica2.review;
 
 
 
@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.cloudapps.practica2.model.Review;
-import com.cloudapps.practica2.model.User;
+import com.cloudapps.practica2.user.User;
 
 
 

@@ -1,6 +1,6 @@
-package com.cloudapps.practica2.model;
+package com.cloudapps.practica2.review;
 
-
+import com.cloudapps.practica2.user.User;
 
 public class Review {
     

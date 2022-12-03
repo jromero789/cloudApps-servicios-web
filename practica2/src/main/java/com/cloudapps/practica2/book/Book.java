@@ -1,6 +1,8 @@
-package com.cloudapps.practica2.model;
+package com.cloudapps.practica2.book;
 
 import java.util.List;
+
+import com.cloudapps.practica2.review.Review;
 
 public class Book {
  

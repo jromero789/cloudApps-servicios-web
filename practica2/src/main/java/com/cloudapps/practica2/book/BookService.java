@@ -1,4 +1,4 @@
-package com.cloudapps.practica2.service;
+package com.cloudapps.practica2.book;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,8 +7,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.stereotype.Service;
 
-import com.cloudapps.practica2.model.Book;
-import com.cloudapps.practica2.model.Review;
+import com.cloudapps.practica2.review.Review;
 
 
 @Service
