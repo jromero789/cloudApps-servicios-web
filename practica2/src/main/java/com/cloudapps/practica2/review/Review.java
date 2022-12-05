@@ -41,11 +41,11 @@ public class Review {
     }
 
     public Long getUsernameId() {
-        return this.username.getId();
+        return this.username == null ? null : this.username.getId();
     }
 
     public Long getBookId() {
-        return this.book.getId();
+        return this.book == null ? null : this.book.getId();
     }
     
     public Long getId() {
