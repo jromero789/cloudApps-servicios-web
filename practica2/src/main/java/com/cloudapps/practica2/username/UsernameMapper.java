@@ -1,16 +1,18 @@
 package com.cloudapps.practica2.username;
 
-import java.util.Collection;
-import java.util.List;
-
 import org.mapstruct.Mapper;
+import org.springframework.data.domain.Page;
 
 @Mapper(componentModel = "spring")
 public interface UsernameMapper {
 
     UsernameDTO toDTO(Username username);
 
-    List<UsernameDTO> toDTOs(Collection<Username> usernames);
+    UsernameDTO toDTOs(Username username);
+
+    default Page<UsernameDTO> toDTOs(Page<Username> page) {
+        return page.map(this::toDTOs);
+    }
 
     Username toDomain(UsernameDTO usernameDTO);
 }

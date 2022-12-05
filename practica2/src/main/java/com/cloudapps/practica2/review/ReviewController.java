@@ -1,8 +1,8 @@
 package com.cloudapps.practica2.review;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +22,8 @@ public class ReviewController {
 	private ReviewMapper mapper;
 
 	@GetMapping("/")
-	public Collection<ReviewDTO> getReviews() {
-		return mapper.toDTOs(reviewService.findAll());
+	public Page<ReviewDTO> getReviews(Pageable page) {
+		return mapper.toDTOs(reviewService.findAll(page));
 	}
 
 	@GetMapping("/{id}")

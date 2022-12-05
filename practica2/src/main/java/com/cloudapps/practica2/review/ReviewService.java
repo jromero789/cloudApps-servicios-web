@@ -2,6 +2,8 @@ package com.cloudapps.practica2.review;
 
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -12,8 +14,8 @@ public class ReviewService {
 	private ReviewRepository reviewRepository;
 
 
-	public Collection<Review> findAll() {
-		return reviewRepository.findAll();
+	public Page<Review> findAll(Pageable page) {
+		return reviewRepository.findAll(page);
 	}
 
     public Review findById(long id) {

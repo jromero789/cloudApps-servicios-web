@@ -1,8 +1,8 @@
 package com.cloudapps.practica2.username;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +21,8 @@ public class UsernameController {
 	private UsernameMapper mapper;
 
 	@GetMapping("/")
-	public Collection<UsernameDTO> getUsers() {
-		return mapper.toDTOs(usernameService.findAll());
+	public Page<UsernameDTO> getUsers(Pageable page) {
+		return mapper.toDTOs(usernameService.findAll(page));
 	}
 
 	@GetMapping("/{id}")
