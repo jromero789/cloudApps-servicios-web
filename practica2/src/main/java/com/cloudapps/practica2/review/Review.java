@@ -40,6 +40,13 @@ public class Review {
         this.book = book;
     }
 
+    public Long getUsernameId() {
+        return this.username.getId();
+    }
+
+    public Long getBookId() {
+        return this.book.getId();
+    }
     
     public Long getId() {
         return id;
