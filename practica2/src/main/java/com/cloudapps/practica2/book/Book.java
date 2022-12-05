@@ -31,14 +31,13 @@ public class Book {
 
 	}
 
-    public Book(String title, String summary, String author, String publisher, int publicationYear, List<Review> reviews) {
+    public Book(String title, String summary, String author, String publisher, int publicationYear) {
         super();
         this.title = title;
         this.summary = summary;
         this.author = author;
         this.publisher = publisher;
         this.publicationYear = publicationYear;
-        this.reviews = reviews;
     }
 
 

@@ -41,8 +41,7 @@ public class DatabaseInitializer {
             "Summary1",
             "Author1",
             "Publisher1",
-            2001,
-			new ArrayList<>()
+            2001
 		);
 		bookRepository.save(book1);
 
@@ -50,8 +49,7 @@ public class DatabaseInitializer {
             "Summary2",
             "Author2",
             "Publisher2",
-            2002,
-			new ArrayList<>()
+            2002
 		);
 		bookRepository.save(book2);
 

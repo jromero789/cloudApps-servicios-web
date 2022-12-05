@@ -21,7 +21,7 @@ public class Review {
     private int rating;
 
     @OneToOne
-    private Username username;@OneToOne
+    private Username username;
 
     @JsonIgnore
     @ManyToOne

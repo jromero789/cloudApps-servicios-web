@@ -1,9 +1,15 @@
 package com.cloudapps.practica2.username;
 
+import java.util.List;
+
+import com.cloudapps.practica2.review.Review;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Username {
@@ -14,6 +20,9 @@ public class Username {
     private String name;
     private String email;
     
+    @JsonIgnore
+    @OneToMany(mappedBy="username", orphanRemoval=true)
+    private List<Review> reviews;
 
     public Username(){
 
@@ -47,5 +56,13 @@ public class Username {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
