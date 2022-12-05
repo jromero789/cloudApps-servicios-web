@@ -8,11 +8,15 @@ public interface BookMapper {
 
     BookDTO toDTO(Book book);
 
-    BookDTO toDTOs(Book book);
-
     default Page<BookDTO> toDTOs(Page<Book> page) {
-        return page.map(this::toDTOs);
+        return page.map(this::toDTO);
     }
 
     Book toDomain(BookDTO bookDTO);
+
+    BookMinInfoDTO minInfoToDTO(Book book);
+
+    default Page<BookMinInfoDTO> minInfoToDTOs(Page<Book> page) {
+        return page.map(this::minInfoToDTO);
+    }
 }

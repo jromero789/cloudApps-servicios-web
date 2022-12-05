@@ -8,10 +8,8 @@ public interface UsernameMapper {
 
     UsernameDTO toDTO(Username username);
 
-    UsernameDTO toDTOs(Username username);
-
     default Page<UsernameDTO> toDTOs(Page<Username> page) {
-        return page.map(this::toDTOs);
+        return page.map(this::toDTO);
     }
 
     Username toDomain(UsernameDTO usernameDTO);

@@ -31,6 +31,11 @@ public class BookController {
 		return mapper.toDTOs(bookService.findAll(page));
 	}
 
+	@GetMapping("/mininfo/")
+	public Page<BookMinInfoDTO> getBooksMinInfo(Pageable page) {
+		return mapper.minInfoToDTOs(bookService.findAll(page));
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<BookDTO> getBook(@PathVariable long id) {
 		Book book = bookService.findById(id);

@@ -8,10 +8,8 @@ public interface ReviewMapper {
 
     ReviewDTO toDTO(Review review);
 
-    ReviewDTO toDTOs(Review review);
-
     default Page<ReviewDTO> toDTOs(Page<Review> page) {
-        return page.map(this::toDTOs);
+        return page.map(this::toDTO);
     }
 
     Review toDomain(ReviewDTO reviewDTO);
