@@ -15,19 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsernameController {
     
     @Autowired
-	private UsernameService userService;
+	private UsernameService usernameService;
+
+	@Autowired
+	private UsernameMapper mapper;
 
 	@GetMapping("/")
-	public Collection<Username> getUsers() {
-		return userService.findAll();
+	public Collection<UsernameDTO> getUsers() {
+		return mapper.toDTOs(usernameService.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Username> getUser(@PathVariable long id) {
-		Username user = userService.findById(id);
+	public ResponseEntity<UsernameDTO> getUser(@PathVariable long id) {
+		Username user = usernameService.findById(id);
 
 		if(user != null){
-			return ResponseEntity.ok(user);
+			return ResponseEntity.ok(mapper.toDTO(user));
 		} else {
 			return ResponseEntity.notFound().build();
 		}
@@ -42,12 +45,12 @@ public class UsernameController {
 	// }
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Username> deleteUser(@PathVariable long id) {
+	public ResponseEntity<UsernameDTO> deleteUser(@PathVariable long id) {
 
-		Username user = userService.findById(id);
+		Username user = usernameService.findById(id);
 		if (user != null) {
-			userService.deleteById(id);
-			return ResponseEntity.ok(user);
+			usernameService.deleteById(id);
+			return ResponseEntity.ok(mapper.toDTO(user));
 		} else {
 			return ResponseEntity.notFound().build();
 		}

@@ -18,17 +18,20 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 
+	@Autowired
+	private ReviewMapper mapper;
+
 	@GetMapping("/")
-	public Collection<Review> getReviews() {
-		return reviewService.findAll();
+	public Collection<ReviewDTO> getReviews() {
+		return mapper.toDTOs(reviewService.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Review> getReview(@PathVariable long id) {
+	public ResponseEntity<ReviewDTO> getReview(@PathVariable long id) {
 		Review review = reviewService.findById(id);
 
 		if(review != null){
-			return ResponseEntity.ok(review);
+			return ResponseEntity.ok(mapper.toDTO(review));
 		} else {
 			return ResponseEntity.notFound().build();
 		}
@@ -43,12 +46,12 @@ public class ReviewController {
 	// }
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Review> deleteReview(@PathVariable long id) {
+	public ResponseEntity<ReviewDTO> deleteReview(@PathVariable long id) {
 
 		Review review = reviewService.findById(id);
 		if (review != null) {
 		reviewService.deleteById(id);
-		return ResponseEntity.ok(review);
+		return ResponseEntity.ok(mapper.toDTO(review));
 		} else {
 		return ResponseEntity.notFound().build();
 		}
