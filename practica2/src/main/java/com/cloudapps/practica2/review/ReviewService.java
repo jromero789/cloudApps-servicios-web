@@ -22,6 +22,10 @@ public class ReviewService {
 		return reviewRepository.findById(id).orElseThrow();
 	}
 
+	public Review save(Review review) {
+		return reviewRepository.save(review);
+	}
+
 	public void deleteById(long id) {
 		reviewRepository.deleteById(id);
 	}

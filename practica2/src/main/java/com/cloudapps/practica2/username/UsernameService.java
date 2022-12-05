@@ -23,6 +23,10 @@ public class UsernameService {
 		return usernameRepository.findById(id).orElseThrow();
 	}
 
+	public Username save(Username username) {
+		return usernameRepository.save(username);
+	}
+
 	public void deleteById(long id) {
 		this.usernameRepository.deleteById(id);
 	}

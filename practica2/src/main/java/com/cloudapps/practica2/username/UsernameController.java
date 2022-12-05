@@ -1,5 +1,7 @@
 package com.cloudapps.practica2.username;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,8 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
 
 @RestController
 @RequestMapping("/users")
@@ -37,13 +43,15 @@ public class UsernameController {
 		}
 	}
 
-	// @PostMapping("/")
-	// public ResponseEntity<Book> createBook(@RequestBody Book book) {
+	@PostMapping("/")
+	public ResponseEntity<UsernameDTO> createPost(@RequestBody UsernameDTO usernameDTO) {
 
-	// 	bookService.save(book);
+		Username username = usernameService.save(mapper.toDomain(usernameDTO));
 
-  	// 	return ResponseEntity.created();
-	// }
+		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(username.getId()).toUri();
+
+		return ResponseEntity.created(location).body(mapper.toDTO(username));
+	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<UsernameDTO> deleteUser(@PathVariable long id) {
