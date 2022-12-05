@@ -1,11 +1,14 @@
 package com.cloudapps.practica2.review;
 
+import com.cloudapps.practica2.book.Book;
 import com.cloudapps.practica2.username.Username;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -14,22 +17,27 @@ public class Review {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long bookId;
     private String comment;
     private int rating;
 
     @OneToOne
-    private Username username;
+    private Username username;@OneToOne
+
+    @JsonIgnore
+    @ManyToOne
+    private Book book;
+
     
     public Review() {
 
     }
 
-    public Review(Username username, String comment, int rating) {
+    public Review(String comment, int rating, Username username, Book book) {
         super();
-        this.username = username;
         this.comment = comment;
         this.rating = rating;
+        this.username = username;
+        this.book = book;
     }
 
     
@@ -39,14 +47,6 @@ public class Review {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
     }
     
     public Username getUsername() {
@@ -72,4 +72,18 @@ public class Review {
     public void setRating(int rating) {
         this.rating = rating;
     }
+
+    public void setUsername(Username username) {
+        this.username = username;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    
 }

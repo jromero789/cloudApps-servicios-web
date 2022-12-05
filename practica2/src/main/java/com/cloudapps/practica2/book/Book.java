@@ -24,7 +24,7 @@ public class Book {
     private String publisher;
     private int publicationYear;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="book", cascade = CascadeType.ALL)
     private List<Review> reviews;
 
     public Book() {
