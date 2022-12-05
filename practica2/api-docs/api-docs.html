@@ -877,6 +877,18 @@ ul.nav-tabs {
     }
   }
 };
+    defs["BookMinInfoDTO"] = {
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "title" : {
+      "type" : "string"
+    }
+  }
+};
     defs["PageBookDTO"] = {
   "type" : "object",
   "properties" : {
@@ -891,15 +903,15 @@ ul.nav-tabs {
     "pageable" : {
       "$ref" : "#/components/schemas/PageableObject"
     },
-    "numberOfElements" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
     "first" : {
       "type" : "boolean"
     },
     "last" : {
       "type" : "boolean"
+    },
+    "numberOfElements" : {
+      "type" : "integer",
+      "format" : "int32"
     },
     "size" : {
       "type" : "integer",
@@ -909,6 +921,52 @@ ul.nav-tabs {
       "type" : "array",
       "items" : {
         "$ref" : "#/components/schemas/BookDTO"
+      }
+    },
+    "number" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "sort" : {
+      "$ref" : "#/components/schemas/SortObject"
+    },
+    "empty" : {
+      "type" : "boolean"
+    }
+  }
+};
+    defs["PageBookMinInfoDTO"] = {
+  "type" : "object",
+  "properties" : {
+    "totalPages" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "totalElements" : {
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "pageable" : {
+      "$ref" : "#/components/schemas/PageableObject"
+    },
+    "first" : {
+      "type" : "boolean"
+    },
+    "last" : {
+      "type" : "boolean"
+    },
+    "numberOfElements" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "size" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "content" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/BookMinInfoDTO"
       }
     },
     "number" : {
@@ -937,15 +995,15 @@ ul.nav-tabs {
     "pageable" : {
       "$ref" : "#/components/schemas/PageableObject"
     },
-    "numberOfElements" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
     "first" : {
       "type" : "boolean"
     },
     "last" : {
       "type" : "boolean"
+    },
+    "numberOfElements" : {
+      "type" : "integer",
+      "format" : "int32"
     },
     "size" : {
       "type" : "integer",
@@ -983,15 +1041,15 @@ ul.nav-tabs {
     "pageable" : {
       "$ref" : "#/components/schemas/PageableObject"
     },
-    "numberOfElements" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
     "first" : {
       "type" : "boolean"
     },
     "last" : {
       "type" : "boolean"
+    },
+    "numberOfElements" : {
+      "type" : "integer",
+      "format" : "int32"
     },
     "size" : {
       "type" : "integer",
@@ -1039,6 +1097,12 @@ ul.nav-tabs {
     defs["PageableObject"] = {
   "type" : "object",
   "properties" : {
+    "paged" : {
+      "type" : "boolean"
+    },
+    "unpaged" : {
+      "type" : "boolean"
+    },
     "pageNumber" : {
       "type" : "integer",
       "format" : "int32"
@@ -1046,12 +1110,6 @@ ul.nav-tabs {
     "pageSize" : {
       "type" : "integer",
       "format" : "int32"
-    },
-    "paged" : {
-      "type" : "boolean"
-    },
-    "unpaged" : {
-      "type" : "boolean"
     },
     "offset" : {
       "type" : "integer",
@@ -1079,16 +1137,16 @@ ul.nav-tabs {
     "username" : {
       "$ref" : "#/components/schemas/Username"
     },
-    "userName" : {
-      "$ref" : "#/components/schemas/Username"
+    "bookId" : {
+      "type" : "integer",
+      "format" : "int64"
     },
     "usernameId" : {
       "type" : "integer",
       "format" : "int64"
     },
-    "bookId" : {
-      "type" : "integer",
-      "format" : "int64"
+    "userName" : {
+      "$ref" : "#/components/schemas/Username"
     }
   }
 };
@@ -1118,10 +1176,10 @@ ul.nav-tabs {
     defs["SortObject"] = {
   "type" : "object",
   "properties" : {
-    "sorted" : {
+    "unsorted" : {
       "type" : "boolean"
     },
-    "unsorted" : {
+    "sorted" : {
       "type" : "boolean"
     },
     "empty" : {
@@ -1156,6 +1214,12 @@ ul.nav-tabs {
     },
     "email" : {
       "type" : "string"
+    },
+    "reviews" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/Review"
+      }
     }
   }
 };
@@ -1178,8 +1242,8 @@ ul.nav-tabs {
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
                   <li class="nav-header" data-group="BookController"><a href="#api-BookController">API Methods - BookController</a></li>
-                    <li data-group="BookController" data-name="createPost" class="">
-                      <a href="#api-BookController-createPost">createPost</a>
+                    <li data-group="BookController" data-name="createPost2" class="">
+                      <a href="#api-BookController-createPost2">createPost2</a>
                     </li>
                     <li data-group="BookController" data-name="deleteBook" class="">
                       <a href="#api-BookController-deleteBook">deleteBook</a>
@@ -1190,7 +1254,13 @@ ul.nav-tabs {
                     <li data-group="BookController" data-name="getBooks" class="">
                       <a href="#api-BookController-getBooks">getBooks</a>
                     </li>
+                    <li data-group="BookController" data-name="getBooksMinInfo" class="">
+                      <a href="#api-BookController-getBooksMinInfo">getBooksMinInfo</a>
+                    </li>
                   <li class="nav-header" data-group="ReviewController"><a href="#api-ReviewController">API Methods - ReviewController</a></li>
+                    <li data-group="ReviewController" data-name="createPost1" class="">
+                      <a href="#api-ReviewController-createPost1">createPost1</a>
+                    </li>
                     <li data-group="ReviewController" data-name="deleteReview" class="">
                       <a href="#api-ReviewController-deleteReview">deleteReview</a>
                     </li>
@@ -1201,6 +1271,9 @@ ul.nav-tabs {
                       <a href="#api-ReviewController-getReviews">getReviews</a>
                     </li>
                   <li class="nav-header" data-group="UsernameController"><a href="#api-UsernameController">API Methods - UsernameController</a></li>
+                    <li data-group="UsernameController" data-name="createPost" class="">
+                      <a href="#api-UsernameController-createPost">createPost</a>
+                    </li>
                     <li data-group="UsernameController" data-name="deleteUser" class="">
                       <a href="#api-UsernameController-deleteUser">deleteUser</a>
                     </li>
@@ -1233,10 +1306,10 @@ ul.nav-tabs {
         <div id="sections">
                 <section id="api-BookController">
                   <h1>BookController</h1>
-                    <div id="api-BookController-createPost">
-                      <article id="api-BookController-createPost-0" data-group="User" data-name="createPost" data-version="0">
+                    <div id="api-BookController-createPost2">
+                      <article id="api-BookController-createPost2-0" data-group="User" data-name="createPost2" data-version="0">
                         <div class="pull-left">
-                          <h1>createPost</h1>
+                          <h1>createPost2</h1>
                           <p></p>
                         </div>
                         <div class="pull-right"></div>
@@ -1250,22 +1323,22 @@ ul.nav-tabs {
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-BookController-createPost-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-BookController-createPost-0-java">Java</a></li>
-                          <li class=""><a href="#examples-BookController-createPost-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-BookController-createPost-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-BookController-createPost-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-BookController-createPost-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-BookController-createPost-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-BookController-createPost-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-BookController-createPost-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-BookController-createPost-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-BookController-createPost-0-python">Python</a></li>
-                          <li class=""><a href="#examples-BookController-createPost-0-rust">Rust</a></li>
+                          <li class="active"><a href="#examples-BookController-createPost2-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-BookController-createPost2-0-java">Java</a></li>
+                          <li class=""><a href="#examples-BookController-createPost2-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-BookController-createPost2-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-BookController-createPost2-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-BookController-createPost2-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-BookController-createPost2-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-BookController-createPost2-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-BookController-createPost2-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-BookController-createPost2-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-BookController-createPost2-0-python">Python</a></li>
+                          <li class=""><a href="#examples-BookController-createPost2-0-rust">Rust</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-BookController-createPost-0-curl">
+                          <div class="tab-pane active" id="examples-BookController-createPost2-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
@@ -1273,47 +1346,47 @@ ul.nav-tabs {
  -d '{
   &quot;summary&quot; : &quot;summary&quot;,
   &quot;reviews&quot; : [ {
-    &quot;rating&quot; : 4,
+    &quot;rating&quot; : 2,
     &quot;comment&quot; : &quot;comment&quot;,
-    &quot;id&quot; : 2,
+    &quot;id&quot; : 3,
     &quot;usernameId&quot; : 1,
     &quot;userName&quot; : {
       &quot;name&quot; : &quot;name&quot;,
-      &quot;id&quot; : 7,
+      &quot;id&quot; : 4,
       &quot;email&quot; : &quot;email&quot;
     },
     &quot;username&quot; : {
       &quot;name&quot; : &quot;name&quot;,
-      &quot;id&quot; : 7,
+      &quot;id&quot; : 4,
       &quot;email&quot; : &quot;email&quot;
     },
-    &quot;bookId&quot; : 1
+    &quot;bookId&quot; : 7
   }, {
-    &quot;rating&quot; : 4,
+    &quot;rating&quot; : 2,
     &quot;comment&quot; : &quot;comment&quot;,
-    &quot;id&quot; : 2,
+    &quot;id&quot; : 3,
     &quot;usernameId&quot; : 1,
     &quot;userName&quot; : {
       &quot;name&quot; : &quot;name&quot;,
-      &quot;id&quot; : 7,
+      &quot;id&quot; : 4,
       &quot;email&quot; : &quot;email&quot;
     },
     &quot;username&quot; : {
       &quot;name&quot; : &quot;name&quot;,
-      &quot;id&quot; : 7,
+      &quot;id&quot; : 4,
       &quot;email&quot; : &quot;email&quot;
     },
-    &quot;bookId&quot; : 1
+    &quot;bookId&quot; : 7
   } ],
   &quot;author&quot; : &quot;author&quot;,
   &quot;publisher&quot; : &quot;publisher&quot;,
-  &quot;publicationYear&quot; : 3,
-  &quot;id&quot; : 9,
+  &quot;publicationYear&quot; : 2,
+  &quot;id&quot; : 5,
   &quot;title&quot; : &quot;title&quot;
 }'
 </code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-BookController-createPost-0-java">
+                          <div class="tab-pane" id="examples-BookController-createPost2-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
 import org.openapitools.client.auth.*;
 import org.openapitools.client.model.*;
@@ -1330,10 +1403,10 @@ public class BookControllerApiExample {
         BookDTO bookDTO = ; // BookDTO | 
 
         try {
-            BookDTO result = apiInstance.createPost(bookDTO);
+            BookDTO result = apiInstance.createPost2(bookDTO);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling BookControllerApi#createPost");
+            System.err.println("Exception when calling BookControllerApi#createPost2");
             e.printStackTrace();
         }
     }
@@ -1341,7 +1414,7 @@ public class BookControllerApiExample {
 </code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-BookController-createPost-0-android">
+                          <div class="tab-pane" id="examples-BookController-createPost2-0-android">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.BookControllerApi;
 
 public class BookControllerApiExample {
@@ -1350,27 +1423,27 @@ public class BookControllerApiExample {
         BookDTO bookDTO = ; // BookDTO | 
 
         try {
-            BookDTO result = apiInstance.createPost(bookDTO);
+            BookDTO result = apiInstance.createPost2(bookDTO);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling BookControllerApi#createPost");
+            System.err.println("Exception when calling BookControllerApi#createPost2");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-BookController-createPost-0-groovy">
+  <div class="tab-pane" id="examples-BookController-createPost2-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-BookController-createPost-0-objc">
+                            <div class="tab-pane" id="examples-BookController-createPost2-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">
 
 // Create an instance of the API class
 BookControllerApi *apiInstance = [[BookControllerApi alloc] init];
 BookDTO *bookDTO = ; // 
 
-[apiInstance createPostWith:bookDTO
+[apiInstance createPost2With:bookDTO
               completionHandler: ^(BookDTO output, NSError* error) {
     if (output) {
         NSLog(@"%@", output);
@@ -1382,7 +1455,7 @@ BookDTO *bookDTO = ; //
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BookController-createPost-0-javascript">
+                            <div class="tab-pane" id="examples-BookController-createPost2-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
 
 // Create an instance of the API class
@@ -1396,14 +1469,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.createPost(bookDTO, callback);
+api.createPost2(bookDTO, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-BookController-createPost-0-angular">
+                            <!--<div class="tab-pane" id="examples-BookController-createPost2-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-BookController-createPost-0-csharp">
+                            <div class="tab-pane" id="examples-BookController-createPost2-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
@@ -1412,7 +1485,7 @@ using Org.OpenAPITools.Model;
 
 namespace Example
 {
-    public class createPostExample
+    public class createPost2Example
     {
         public void main()
         {
@@ -1422,10 +1495,10 @@ namespace Example
             var bookDTO = new BookDTO(); // BookDTO | 
 
             try {
-                BookDTO result = apiInstance.createPost(bookDTO);
+                BookDTO result = apiInstance.createPost2(bookDTO);
                 Debug.WriteLine(result);
             } catch (Exception e) {
-                Debug.Print("Exception when calling BookControllerApi.createPost: " + e.Message );
+                Debug.Print("Exception when calling BookControllerApi.createPost2: " + e.Message );
             }
         }
     }
@@ -1433,7 +1506,7 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BookController-createPost-0-php">
+                            <div class="tab-pane" id="examples-BookController-createPost2-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
@@ -1442,15 +1515,15 @@ $api_instance = new OpenAPITools\Client\Api\BookControllerApi();
 $bookDTO = ; // BookDTO | 
 
 try {
-    $result = $api_instance->createPost($bookDTO);
+    $result = $api_instance->createPost2($bookDTO);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling BookControllerApi->createPost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling BookControllerApi->createPost2: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BookController-createPost-0-perl">
+                            <div class="tab-pane" id="examples-BookController-createPost2-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::OPenAPIClient::Configuration;
 use WWW::OPenAPIClient::BookControllerApi;
@@ -1460,15 +1533,15 @@ my $api_instance = WWW::OPenAPIClient::BookControllerApi->new();
 my $bookDTO = WWW::OPenAPIClient::Object::BookDTO->new(); # BookDTO | 
 
 eval {
-    my $result = $api_instance->createPost(bookDTO => $bookDTO);
+    my $result = $api_instance->createPost2(bookDTO => $bookDTO);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling BookControllerApi->createPost: $@\n";
+    warn "Exception when calling BookControllerApi->createPost2: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BookController-createPost-0-python">
+                            <div class="tab-pane" id="examples-BookController-createPost2-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import openapi_client
@@ -1480,20 +1553,20 @@ api_instance = openapi_client.BookControllerApi()
 bookDTO =  # BookDTO | 
 
 try:
-    api_response = api_instance.create_post(bookDTO)
+    api_response = api_instance.create_post2(bookDTO)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling BookControllerApi->createPost: %s\n" % e)</code></pre>
+    print("Exception when calling BookControllerApi->createPost2: %s\n" % e)</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BookController-createPost-0-rust">
+                            <div class="tab-pane" id="examples-BookController-createPost2-0-rust">
                               <pre class="prettyprint"><code class="language-rust">extern crate BookControllerApi;
 
 pub fn main() {
     let bookDTO = ; // BookDTO
 
     let mut context = BookControllerApi::Context::default();
-    let result = client.createPost(bookDTO, &context).wait();
+    let result = client.createPost2(bookDTO, &context).wait();
 
     println!("{:?}", result);
 }
@@ -1546,12 +1619,12 @@ $(document).ready(function() {
   }
 
   var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createPost_bookDTO');
+  var result = $('#d2e199_createPost2_bookDTO');
   result.empty();
   result.append(view.render());
 });
 </script>
-<div id="d2e199_createPost_bookDTO"></div>
+<div id="d2e199_createPost2_bookDTO"></div>
 </td>
 </tr>
 
@@ -1560,45 +1633,45 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-BookController-createPost-title-404"></h3>
-                            <p id="examples-BookController-createPost-description-404" class="marked"></p>
+                            <h3 id="examples-BookController-createPost2-title-404"></h3>
+                            <p id="examples-BookController-createPost2-description-404" class="marked"></p>
                             <script>
                               var responseBookController404_description = `Not Found`;
                               var responseBookController404_description_break = responseBookController404_description.indexOf('\n');
                               if (responseBookController404_description_break == -1) {
-                                $("#examples-BookController-createPost-title-404").text("Status: 404 - " + responseBookController404_description);
+                                $("#examples-BookController-createPost2-title-404").text("Status: 404 - " + responseBookController404_description);
                               } else {
-                                $("#examples-BookController-createPost-title-404").text("Status: 404 - " + responseBookController404_description.substring(0, responseBookController404_description_break));
-                                $("#examples-BookController-createPost-description-404").html(responseBookController404_description.substring(responseBookController404_description_break));
+                                $("#examples-BookController-createPost2-title-404").text("Status: 404 - " + responseBookController404_description.substring(0, responseBookController404_description_break));
+                                $("#examples-BookController-createPost2-description-404").html(responseBookController404_description.substring(responseBookController404_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-BookController-createPost-404" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-BookController-createPost2-404" class="nav nav-tabs nav-tabs-examples" >
 
 
                             </ul>
 
 
-                            <div class="tab-content" id="responses-BookController-createPost-404-wrapper" style='margin-bottom: 10px;'>
+                            <div class="tab-content" id="responses-BookController-createPost2-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
-                            <h3 id="examples-BookController-createPost-title-200"></h3>
-                            <p id="examples-BookController-createPost-description-200" class="marked"></p>
+                            <h3 id="examples-BookController-createPost2-title-200"></h3>
+                            <p id="examples-BookController-createPost2-description-200" class="marked"></p>
                             <script>
                               var responseBookController200_description = `OK`;
                               var responseBookController200_description_break = responseBookController200_description.indexOf('\n');
                               if (responseBookController200_description_break == -1) {
-                                $("#examples-BookController-createPost-title-200").text("Status: 200 - " + responseBookController200_description);
+                                $("#examples-BookController-createPost2-title-200").text("Status: 200 - " + responseBookController200_description);
                               } else {
-                                $("#examples-BookController-createPost-title-200").text("Status: 200 - " + responseBookController200_description.substring(0, responseBookController200_description_break));
-                                $("#examples-BookController-createPost-description-200").html(responseBookController200_description.substring(responseBookController200_description_break));
+                                $("#examples-BookController-createPost2-title-200").text("Status: 200 - " + responseBookController200_description.substring(0, responseBookController200_description_break));
+                                $("#examples-BookController-createPost2-description-200").html(responseBookController200_description.substring(responseBookController200_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-BookController-createPost-200" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-BookController-createPost2-200" class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-BookController-createPost-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-BookController-createPost2-200-schema">Schema</a>
                                 </li>
 
 
@@ -1607,9 +1680,9 @@ $(document).ready(function() {
                             </ul>
 
 
-                            <div class="tab-content" id="responses-BookController-createPost-200-wrapper" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-BookController-createPost-200-schema">
-                                  <div id="responses-BookController-createPost-schema-200" class="exampleStyle">
+                            <div class="tab-content" id="responses-BookController-createPost2-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-BookController-createPost2-200-schema">
+                                  <div id="responses-BookController-createPost2-schema-200" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -1638,14 +1711,14 @@ $(document).ready(function() {
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-BookController-createPost-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-BookController-createPost-schema-200');
+                                        $('#responses-BookController-createPost2-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-BookController-createPost2-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-BookController-createPost-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-BookController-createPost2-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
                         </article>
@@ -2728,9 +2801,754 @@ pub fn main() {
                         </article>
                       </div>
                       <hr>
+                    <div id="api-BookController-getBooksMinInfo">
+                      <article id="api-BookController-getBooksMinInfo-0" data-group="User" data-name="getBooksMinInfo" data-version="0">
+                        <div class="pull-left">
+                          <h1>getBooksMinInfo</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/books/mininfo/</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-BookController-getBooksMinInfo-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-BookController-getBooksMinInfo-0-java">Java</a></li>
+                          <li class=""><a href="#examples-BookController-getBooksMinInfo-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-BookController-getBooksMinInfo-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-BookController-getBooksMinInfo-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-BookController-getBooksMinInfo-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-BookController-getBooksMinInfo-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-BookController-getBooksMinInfo-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-BookController-getBooksMinInfo-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-BookController-getBooksMinInfo-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-BookController-getBooksMinInfo-0-python">Python</a></li>
+                          <li class=""><a href="#examples-BookController-getBooksMinInfo-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-BookController-getBooksMinInfo-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET \
+ -H "Accept: */*" \
+ "http://localhost:8080/books/mininfo/?page="
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.BookControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class BookControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        BookControllerApi apiInstance = new BookControllerApi();
+        Pageable page = ; // Pageable | 
+
+        try {
+            PageBookMinInfoDTO result = apiInstance.getBooksMinInfo(page);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling BookControllerApi#getBooksMinInfo");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.BookControllerApi;
+
+public class BookControllerApiExample {
+    public static void main(String[] args) {
+        BookControllerApi apiInstance = new BookControllerApi();
+        Pageable page = ; // Pageable | 
+
+        try {
+            PageBookMinInfoDTO result = apiInstance.getBooksMinInfo(page);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling BookControllerApi#getBooksMinInfo");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+BookControllerApi *apiInstance = [[BookControllerApi alloc] init];
+Pageable *page = ; //  (default to null)
+
+[apiInstance getBooksMinInfoWith:page
+              completionHandler: ^(PageBookMinInfoDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.BookControllerApi()
+var page = ; // {Pageable} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getBooksMinInfo(page, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class getBooksMinInfoExample
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new BookControllerApi();
+            var page = new Pageable(); // Pageable |  (default to null)
+
+            try {
+                PageBookMinInfoDTO result = apiInstance.getBooksMinInfo(page);
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling BookControllerApi.getBooksMinInfo: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\BookControllerApi();
+$page = ; // Pageable | 
+
+try {
+    $result = $api_instance->getBooksMinInfo($page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BookControllerApi->getBooksMinInfo: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::BookControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::BookControllerApi->new();
+my $page = ; # Pageable | 
+
+eval {
+    my $result = $api_instance->getBooksMinInfo(page => $page);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling BookControllerApi->getBooksMinInfo: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.BookControllerApi()
+page =  # Pageable |  (default to null)
+
+try:
+    api_response = api_instance.get_books_min_info(page)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling BookControllerApi->getBooksMinInfo: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BookController-getBooksMinInfo-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate BookControllerApi;
+
+pub fn main() {
+    let page = ; // Pageable
+
+    let mut context = BookControllerApi::Context::default();
+    let result = client.getBooksMinInfo(page, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">page*</td>
+<td>
+
+
+    <div id="d2e199_getBooksMinInfo_page">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Pageable
+                </span>
+
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-BookController-getBooksMinInfo-title-404"></h3>
+                            <p id="examples-BookController-getBooksMinInfo-description-404" class="marked"></p>
+                            <script>
+                              var responseBookController404_description = `Not Found`;
+                              var responseBookController404_description_break = responseBookController404_description.indexOf('\n');
+                              if (responseBookController404_description_break == -1) {
+                                $("#examples-BookController-getBooksMinInfo-title-404").text("Status: 404 - " + responseBookController404_description);
+                              } else {
+                                $("#examples-BookController-getBooksMinInfo-title-404").text("Status: 404 - " + responseBookController404_description.substring(0, responseBookController404_description_break));
+                                $("#examples-BookController-getBooksMinInfo-description-404").html(responseBookController404_description.substring(responseBookController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookController-getBooksMinInfo-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookController-getBooksMinInfo-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-BookController-getBooksMinInfo-title-200"></h3>
+                            <p id="examples-BookController-getBooksMinInfo-description-200" class="marked"></p>
+                            <script>
+                              var responseBookController200_description = `OK`;
+                              var responseBookController200_description_break = responseBookController200_description.indexOf('\n');
+                              if (responseBookController200_description_break == -1) {
+                                $("#examples-BookController-getBooksMinInfo-title-200").text("Status: 200 - " + responseBookController200_description);
+                              } else {
+                                $("#examples-BookController-getBooksMinInfo-title-200").text("Status: 200 - " + responseBookController200_description.substring(0, responseBookController200_description_break));
+                                $("#examples-BookController-getBooksMinInfo-description-200").html(responseBookController200_description.substring(responseBookController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookController-getBooksMinInfo-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-BookController-getBooksMinInfo-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookController-getBooksMinInfo-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-BookController-getBooksMinInfo-200-schema">
+                                  <div id="responses-BookController-getBooksMinInfo-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/PageBookMinInfoDTO"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-BookController-getBooksMinInfo-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-BookController-getBooksMinInfo-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-BookController-getBooksMinInfo-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
                   </section>
                 <section id="api-ReviewController">
                   <h1>ReviewController</h1>
+                    <div id="api-ReviewController-createPost1">
+                      <article id="api-ReviewController-createPost1-0" data-group="User" data-name="createPost1" data-version="0">
+                        <div class="pull-left">
+                          <h1>createPost1</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/reviews/</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ReviewController-createPost1-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ReviewController-createPost1-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ReviewController-createPost1-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ReviewController-createPost1-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ReviewController-createPost1-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ReviewController-createPost1-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ReviewController-createPost1-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ReviewController-createPost1-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ReviewController-createPost1-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ReviewController-createPost1-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ReviewController-createPost1-0-python">Python</a></li>
+                          <li class=""><a href="#examples-ReviewController-createPost1-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ReviewController-createPost1-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+ -H "Accept: */*" \
+ -H "Content-Type: application/json" \
+ "http://localhost:8080/reviews/" \
+ -d '{
+  &quot;rating&quot; : 7,
+  &quot;comment&quot; : &quot;comment&quot;,
+  &quot;id&quot; : 5,
+  &quot;bookId&quot; : 2,
+  &quot;username&quot; : {
+    &quot;name&quot; : &quot;name&quot;,
+    &quot;id&quot; : 4,
+    &quot;email&quot; : &quot;email&quot;
+  }
+}'
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ReviewController-createPost1-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.ReviewControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ReviewControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        ReviewControllerApi apiInstance = new ReviewControllerApi();
+        ReviewDTO reviewDTO = ; // ReviewDTO | 
+
+        try {
+            ReviewDTO result = apiInstance.createPost1(reviewDTO);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ReviewControllerApi#createPost1");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ReviewController-createPost1-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.ReviewControllerApi;
+
+public class ReviewControllerApiExample {
+    public static void main(String[] args) {
+        ReviewControllerApi apiInstance = new ReviewControllerApi();
+        ReviewDTO reviewDTO = ; // ReviewDTO | 
+
+        try {
+            ReviewDTO result = apiInstance.createPost1(reviewDTO);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ReviewControllerApi#createPost1");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ReviewController-createPost1-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ReviewController-createPost1-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+ReviewControllerApi *apiInstance = [[ReviewControllerApi alloc] init];
+ReviewDTO *reviewDTO = ; // 
+
+[apiInstance createPost1With:reviewDTO
+              completionHandler: ^(ReviewDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ReviewController-createPost1-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.ReviewControllerApi()
+var reviewDTO = ; // {ReviewDTO} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.createPost1(reviewDTO, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ReviewController-createPost1-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ReviewController-createPost1-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class createPost1Example
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new ReviewControllerApi();
+            var reviewDTO = new ReviewDTO(); // ReviewDTO | 
+
+            try {
+                ReviewDTO result = apiInstance.createPost1(reviewDTO);
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling ReviewControllerApi.createPost1: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ReviewController-createPost1-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\ReviewControllerApi();
+$reviewDTO = ; // ReviewDTO | 
+
+try {
+    $result = $api_instance->createPost1($reviewDTO);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ReviewControllerApi->createPost1: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ReviewController-createPost1-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::ReviewControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::ReviewControllerApi->new();
+my $reviewDTO = WWW::OPenAPIClient::Object::ReviewDTO->new(); # ReviewDTO | 
+
+eval {
+    my $result = $api_instance->createPost1(reviewDTO => $reviewDTO);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ReviewControllerApi->createPost1: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ReviewController-createPost1-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.ReviewControllerApi()
+reviewDTO =  # ReviewDTO | 
+
+try:
+    api_response = api_instance.create_post1(reviewDTO)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ReviewControllerApi->createPost1: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ReviewController-createPost1-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate ReviewControllerApi;
+
+pub fn main() {
+    let reviewDTO = ; // ReviewDTO
+
+    let mut context = ReviewControllerApi::Context::default();
+    let result = client.createPost1(reviewDTO, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">reviewDTO <span style="color:red;">*</span></td>
+<td>
+<p class="marked"></p>
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ReviewDTO"
+      }
+    }
+  },
+  "required" : true
+};
+
+  var schema = findNode('schema',schemaWrapper).schema;
+  if (!schema) {
+    schema = schemaWrapper.schema;
+  }
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_createPost1_reviewDTO');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_createPost1_reviewDTO"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-ReviewController-createPost1-title-404"></h3>
+                            <p id="examples-ReviewController-createPost1-description-404" class="marked"></p>
+                            <script>
+                              var responseReviewController404_description = `Not Found`;
+                              var responseReviewController404_description_break = responseReviewController404_description.indexOf('\n');
+                              if (responseReviewController404_description_break == -1) {
+                                $("#examples-ReviewController-createPost1-title-404").text("Status: 404 - " + responseReviewController404_description);
+                              } else {
+                                $("#examples-ReviewController-createPost1-title-404").text("Status: 404 - " + responseReviewController404_description.substring(0, responseReviewController404_description_break));
+                                $("#examples-ReviewController-createPost1-description-404").html(responseReviewController404_description.substring(responseReviewController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ReviewController-createPost1-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ReviewController-createPost1-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-ReviewController-createPost1-title-200"></h3>
+                            <p id="examples-ReviewController-createPost1-description-200" class="marked"></p>
+                            <script>
+                              var responseReviewController200_description = `OK`;
+                              var responseReviewController200_description_break = responseReviewController200_description.indexOf('\n');
+                              if (responseReviewController200_description_break == -1) {
+                                $("#examples-ReviewController-createPost1-title-200").text("Status: 200 - " + responseReviewController200_description);
+                              } else {
+                                $("#examples-ReviewController-createPost1-title-200").text("Status: 200 - " + responseReviewController200_description.substring(0, responseReviewController200_description_break));
+                                $("#examples-ReviewController-createPost1-description-200").html(responseReviewController200_description.substring(responseReviewController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ReviewController-createPost1-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-ReviewController-createPost1-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ReviewController-createPost1-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-ReviewController-createPost1-200-schema">
+                                  <div id="responses-ReviewController-createPost1-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ReviewDTO"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-ReviewController-createPost1-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-ReviewController-createPost1-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-ReviewController-createPost1-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-ReviewController-deleteReview">
                       <article id="api-ReviewController-deleteReview-0" data-group="User" data-name="deleteReview" data-version="0">
                         <div class="pull-left">
@@ -3811,6 +4629,421 @@ pub fn main() {
                   </section>
                 <section id="api-UsernameController">
                   <h1>UsernameController</h1>
+                    <div id="api-UsernameController-createPost">
+                      <article id="api-UsernameController-createPost-0" data-group="User" data-name="createPost" data-version="0">
+                        <div class="pull-left">
+                          <h1>createPost</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/users/</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-UsernameController-createPost-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-UsernameController-createPost-0-java">Java</a></li>
+                          <li class=""><a href="#examples-UsernameController-createPost-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-UsernameController-createPost-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-UsernameController-createPost-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-UsernameController-createPost-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-UsernameController-createPost-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-UsernameController-createPost-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-UsernameController-createPost-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-UsernameController-createPost-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-UsernameController-createPost-0-python">Python</a></li>
+                          <li class=""><a href="#examples-UsernameController-createPost-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-UsernameController-createPost-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+ -H "Accept: */*" \
+ -H "Content-Type: application/json" \
+ "http://localhost:8080/users/" \
+ -d '{
+  &quot;reviews&quot; : [ {
+    &quot;rating&quot; : 2,
+    &quot;comment&quot; : &quot;comment&quot;,
+    &quot;id&quot; : 3,
+    &quot;usernameId&quot; : 1,
+    &quot;userName&quot; : {
+      &quot;name&quot; : &quot;name&quot;,
+      &quot;id&quot; : 4,
+      &quot;email&quot; : &quot;email&quot;
+    },
+    &quot;username&quot; : {
+      &quot;name&quot; : &quot;name&quot;,
+      &quot;id&quot; : 4,
+      &quot;email&quot; : &quot;email&quot;
+    },
+    &quot;bookId&quot; : 7
+  }, {
+    &quot;rating&quot; : 2,
+    &quot;comment&quot; : &quot;comment&quot;,
+    &quot;id&quot; : 3,
+    &quot;usernameId&quot; : 1,
+    &quot;userName&quot; : {
+      &quot;name&quot; : &quot;name&quot;,
+      &quot;id&quot; : 4,
+      &quot;email&quot; : &quot;email&quot;
+    },
+    &quot;username&quot; : {
+      &quot;name&quot; : &quot;name&quot;,
+      &quot;id&quot; : 4,
+      &quot;email&quot; : &quot;email&quot;
+    },
+    &quot;bookId&quot; : 7
+  } ],
+  &quot;name&quot; : &quot;name&quot;,
+  &quot;id&quot; : 9,
+  &quot;email&quot; : &quot;email&quot;
+}'
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-UsernameController-createPost-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.UsernameControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class UsernameControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        UsernameControllerApi apiInstance = new UsernameControllerApi();
+        UsernameDTO usernameDTO = ; // UsernameDTO | 
+
+        try {
+            UsernameDTO result = apiInstance.createPost(usernameDTO);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsernameControllerApi#createPost");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-UsernameController-createPost-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.UsernameControllerApi;
+
+public class UsernameControllerApiExample {
+    public static void main(String[] args) {
+        UsernameControllerApi apiInstance = new UsernameControllerApi();
+        UsernameDTO usernameDTO = ; // UsernameDTO | 
+
+        try {
+            UsernameDTO result = apiInstance.createPost(usernameDTO);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsernameControllerApi#createPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-UsernameController-createPost-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-UsernameController-createPost-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+UsernameControllerApi *apiInstance = [[UsernameControllerApi alloc] init];
+UsernameDTO *usernameDTO = ; // 
+
+[apiInstance createPostWith:usernameDTO
+              completionHandler: ^(UsernameDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UsernameController-createPost-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.UsernameControllerApi()
+var usernameDTO = ; // {UsernameDTO} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.createPost(usernameDTO, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-UsernameController-createPost-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-UsernameController-createPost-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class createPostExample
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new UsernameControllerApi();
+            var usernameDTO = new UsernameDTO(); // UsernameDTO | 
+
+            try {
+                UsernameDTO result = apiInstance.createPost(usernameDTO);
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling UsernameControllerApi.createPost: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UsernameController-createPost-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\UsernameControllerApi();
+$usernameDTO = ; // UsernameDTO | 
+
+try {
+    $result = $api_instance->createPost($usernameDTO);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling UsernameControllerApi->createPost: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UsernameController-createPost-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::UsernameControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::UsernameControllerApi->new();
+my $usernameDTO = WWW::OPenAPIClient::Object::UsernameDTO->new(); # UsernameDTO | 
+
+eval {
+    my $result = $api_instance->createPost(usernameDTO => $usernameDTO);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling UsernameControllerApi->createPost: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UsernameController-createPost-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.UsernameControllerApi()
+usernameDTO =  # UsernameDTO | 
+
+try:
+    api_response = api_instance.create_post(usernameDTO)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling UsernameControllerApi->createPost: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UsernameController-createPost-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate UsernameControllerApi;
+
+pub fn main() {
+    let usernameDTO = ; // UsernameDTO
+
+    let mut context = UsernameControllerApi::Context::default();
+    let result = client.createPost(usernameDTO, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">usernameDTO <span style="color:red;">*</span></td>
+<td>
+<p class="marked"></p>
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/UsernameDTO"
+      }
+    }
+  },
+  "required" : true
+};
+
+  var schema = findNode('schema',schemaWrapper).schema;
+  if (!schema) {
+    schema = schemaWrapper.schema;
+  }
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_createPost_usernameDTO');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_createPost_usernameDTO"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-UsernameController-createPost-title-404"></h3>
+                            <p id="examples-UsernameController-createPost-description-404" class="marked"></p>
+                            <script>
+                              var responseUsernameController404_description = `Not Found`;
+                              var responseUsernameController404_description_break = responseUsernameController404_description.indexOf('\n');
+                              if (responseUsernameController404_description_break == -1) {
+                                $("#examples-UsernameController-createPost-title-404").text("Status: 404 - " + responseUsernameController404_description);
+                              } else {
+                                $("#examples-UsernameController-createPost-title-404").text("Status: 404 - " + responseUsernameController404_description.substring(0, responseUsernameController404_description_break));
+                                $("#examples-UsernameController-createPost-description-404").html(responseUsernameController404_description.substring(responseUsernameController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UsernameController-createPost-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UsernameController-createPost-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-UsernameController-createPost-title-200"></h3>
+                            <p id="examples-UsernameController-createPost-description-200" class="marked"></p>
+                            <script>
+                              var responseUsernameController200_description = `OK`;
+                              var responseUsernameController200_description_break = responseUsernameController200_description.indexOf('\n');
+                              if (responseUsernameController200_description_break == -1) {
+                                $("#examples-UsernameController-createPost-title-200").text("Status: 200 - " + responseUsernameController200_description);
+                              } else {
+                                $("#examples-UsernameController-createPost-title-200").text("Status: 200 - " + responseUsernameController200_description.substring(0, responseUsernameController200_description_break));
+                                $("#examples-UsernameController-createPost-description-200").html(responseUsernameController200_description.substring(responseUsernameController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UsernameController-createPost-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-UsernameController-createPost-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UsernameController-createPost-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-UsernameController-createPost-200-schema">
+                                  <div id="responses-UsernameController-createPost-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/UsernameDTO"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-UsernameController-createPost-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-UsernameController-createPost-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-UsernameController-createPost-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-UsernameController-deleteUser">
                       <article id="api-UsernameController-deleteUser-0" data-group="User" data-name="deleteUser" data-version="0">
                         <div class="pull-left">

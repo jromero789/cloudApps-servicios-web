@@ -26,6 +26,26 @@
 			"response": []
 		},
 		{
+			"name": "localhost:8080/books/mininfo/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/books/mininfo/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						"mininfo",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "localhost:8080/books/1",
 			"request": {
 				"method": "GET",
@@ -96,6 +116,34 @@
 			"request": {
 				"method": "GET",
 				"header": [],
+				"url": {
+					"raw": "localhost:8080/reviews/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"reviews",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/reviews/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"comment\":\"comment4\",\n    \"rating\":3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "localhost:8080/reviews/",
 					"host": [
@@ -187,6 +235,34 @@
 			"response": []
 		},
 		{
+			"name": "localhost:8080/users/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"name3\",\n    \"email\":\"email3@email.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "localhost:8080/users/1",
 			"request": {
 				"method": "DELETE",
@@ -200,6 +276,25 @@
 					"path": [
 						"users",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/users/2",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"2"
 					]
 				}
 			},

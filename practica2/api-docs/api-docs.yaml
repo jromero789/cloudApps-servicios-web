@@ -6,6 +6,84 @@ servers:
 - url: http://localhost:8080
   description: Generated server url
 paths:
+  /users/:
+    get:
+      tags:
+      - username-controller
+      operationId: getUsers
+      parameters:
+      - name: page
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageUsernameDTO'
+    post:
+      tags:
+      - username-controller
+      operationId: createPost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernameDTO'
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UsernameDTO'
+  /reviews/:
+    get:
+      tags:
+      - review-controller
+      operationId: getReviews
+      parameters:
+      - name: page
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageReviewDTO'
+    post:
+      tags:
+      - review-controller
+      operationId: createPost_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewDTO'
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReviewDTO'
   /books/:
     get:
       tags:
@@ -29,7 +107,7 @@ paths:
     post:
       tags:
       - book-controller
-      operationId: createPost
+      operationId: createPost_2
       requestBody:
         content:
           application/json:
@@ -86,26 +164,6 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/UsernameDTO'
-  /users/:
-    get:
-      tags:
-      - username-controller
-      operationId: getUsers
-      parameters:
-      - name: page
-        in: query
-        required: true
-        schema:
-          $ref: '#/components/schemas/Pageable'
-      responses:
-        "404":
-          description: Not Found
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/PageUsernameDTO'
   /reviews/{id}:
     get:
       tags:
@@ -147,26 +205,6 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ReviewDTO'
-  /reviews/:
-    get:
-      tags:
-      - review-controller
-      operationId: getReviews
-      parameters:
-      - name: page
-        in: query
-        required: true
-        schema:
-          $ref: '#/components/schemas/Pageable'
-      responses:
-        "404":
-          description: Not Found
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/PageReviewDTO'
   /books/{id}:
     get:
       tags:
@@ -208,8 +246,89 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/BookDTO'
+  /books/mininfo/:
+    get:
+      tags:
+      - book-controller
+      operationId: getBooksMinInfo
+      parameters:
+      - name: page
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageBookMinInfoDTO'
 components:
   schemas:
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        comment:
+          type: string
+        rating:
+          type: integer
+          format: int32
+        username:
+          $ref: '#/components/schemas/Username'
+        bookId:
+          type: integer
+          format: int64
+        usernameId:
+          type: integer
+          format: int64
+        userName:
+          $ref: '#/components/schemas/Username'
+    Username:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+    UsernameDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+    ReviewDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        bookId:
+          type: integer
+          format: int64
+        comment:
+          type: string
+        rating:
+          type: integer
+          format: int32
+        username:
+          $ref: '#/components/schemas/Username'
     BookDTO:
       type: object
       properties:
@@ -231,47 +350,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Review'
-    Review:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        comment:
-          type: string
-        rating:
-          type: integer
-          format: int32
-        username:
-          $ref: '#/components/schemas/Username'
-        userName:
-          $ref: '#/components/schemas/Username'
-        usernameId:
-          type: integer
-          format: int64
-        bookId:
-          type: integer
-          format: int64
-    Username:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        email:
-          type: string
-    UsernameDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        email:
-          type: string
     Pageable:
       type: object
       properties:
@@ -298,13 +376,13 @@ components:
           format: int64
         pageable:
           $ref: '#/components/schemas/PageableObject'
-        numberOfElements:
-          type: integer
-          format: int32
         first:
           type: boolean
         last:
           type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
         size:
           type: integer
           format: int32
@@ -322,16 +400,16 @@ components:
     PageableObject:
       type: object
       properties:
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
         pageNumber:
           type: integer
           format: int32
         pageSize:
           type: integer
           format: int32
-        paged:
-          type: boolean
-        unpaged:
-          type: boolean
         offset:
           type: integer
           format: int64
@@ -340,28 +418,12 @@ components:
     SortObject:
       type: object
       properties:
-        sorted:
-          type: boolean
         unsorted:
+          type: boolean
+        sorted:
           type: boolean
         empty:
           type: boolean
-    ReviewDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        bookId:
-          type: integer
-          format: int64
-        comment:
-          type: string
-        rating:
-          type: integer
-          format: int32
-        username:
-          $ref: '#/components/schemas/Username'
     PageReviewDTO:
       type: object
       properties:
@@ -373,13 +435,13 @@ components:
           format: int64
         pageable:
           $ref: '#/components/schemas/PageableObject'
-        numberOfElements:
-          type: integer
-          format: int32
         first:
           type: boolean
         last:
           type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
         size:
           type: integer
           format: int32
@@ -387,6 +449,46 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ReviewDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/SortObject'
+        empty:
+          type: boolean
+    BookMinInfoDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+    PageBookMinInfoDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookMinInfoDTO'
         number:
           type: integer
           format: int32
@@ -405,13 +507,13 @@ components:
           format: int64
         pageable:
           $ref: '#/components/schemas/PageableObject'
-        numberOfElements:
-          type: integer
-          format: int32
         first:
           type: boolean
         last:
           type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
         size:
           type: integer
           format: int32
