@@ -1,6 +1,6 @@
 package com.cloudapps.practica2.review;
 
-import com.cloudapps.practica2.user.UserName;
+import com.cloudapps.practica2.username.Username;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,15 +19,15 @@ public class Review {
     private int rating;
 
     @OneToOne
-    private UserName userName;
+    private Username username;
     
     public Review() {
 
     }
 
-    public Review(UserName userName, String comment, int rating) {
+    public Review(Username username, String comment, int rating) {
         super();
-        this.userName = userName;
+        this.username = username;
         this.comment = comment;
         this.rating = rating;
     }
@@ -49,12 +49,12 @@ public class Review {
         this.bookId = bookId;
     }
     
-    public UserName getUserName() {
-        return userName;
+    public Username getUsername() {
+        return username;
     }
 
-    public void setUserName(UserName userName) {
-        this.userName = userName;
+    public void setUserName(Username username) {
+        this.username = username;
     }
 
     public String getComment() {

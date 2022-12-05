@@ -1,4 +1,4 @@
-package com.cloudapps.practica2.user;
+package com.cloudapps.practica2.username;
 
 import java.util.Collection;
 
@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/users")
-public class UserNameController {
+public class UsernameController {
     
     @Autowired
-	private UserNameService userService;
+	private UsernameService userService;
 
 	@GetMapping("/")
-	public Collection<UserName> getUsers() {
+	public Collection<Username> getUsers() {
 		return userService.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<UserName> getUser(@PathVariable long id) {
-		UserName user = userService.findById(id);
+	public ResponseEntity<Username> getUser(@PathVariable long id) {
+		Username user = userService.findById(id);
 
 		if(user != null){
 			return ResponseEntity.ok(user);
@@ -42,9 +42,9 @@ public class UserNameController {
 	// }
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<UserName> deleteUser(@PathVariable long id) {
+	public ResponseEntity<Username> deleteUser(@PathVariable long id) {
 
-		UserName user = userService.findById(id);
+		Username user = userService.findById(id);
 		if (user != null) {
 			userService.deleteById(id);
 			return ResponseEntity.ok(user);

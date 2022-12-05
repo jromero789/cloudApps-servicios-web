@@ -1,4 +1,4 @@
-package com.cloudapps.practica2.user;
+package com.cloudapps.practica2.username;
 
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,17 +7,17 @@ import org.springframework.web.context.annotation.SessionScope;
 
 @Component
 @SessionScope
-public class UserNameService {
+public class UsernameService {
 
 	@Autowired
-	private UserNameRepository userRepository;
+	private UsernameRepository userRepository;
 	
 
-	public Collection<UserName> findAll() {
+	public Collection<Username> findAll() {
 		return userRepository.findAll();
 	}
 
-    public UserName findById(long id) {
+    public Username findById(long id) {
 		return userRepository.findById(id).orElseThrow();
 	}
 

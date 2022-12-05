@@ -1,9 +1,4 @@
-package com.cloudapps.practica2.user;
-
-import java.util.List;
-
-import com.cloudapps.practica2.review.Review;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.cloudapps.practica2.username;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class UserName {
+public class Username {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,11 +15,11 @@ public class UserName {
     private String email;
     
 
-    public UserName(){
+    public Username(){
 
     }
     
-    public UserName(String name, String email) {
+    public Username(String name, String email) {
         super();
         this.name = name;
         this.email = email;
