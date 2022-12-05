@@ -3,6 +3,7 @@ package com.cloudapps.practica2.username;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,9 +49,11 @@ public class UsernameController {
 	public ResponseEntity<UsernameDTO> deleteUser(@PathVariable long id) {
 
 		Username user = usernameService.findById(id);
-		if (user != null) {
+		if (user != null && user.getReviews() != null && user.getReviews().isEmpty()) {
 			usernameService.deleteById(id);
 			return ResponseEntity.ok(mapper.toDTO(user));
+		}else if(user != null && user.getReviews() != null && !user.getReviews().isEmpty()){
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		} else {
 			return ResponseEntity.notFound().build();
 		}

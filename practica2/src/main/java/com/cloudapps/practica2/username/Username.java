@@ -5,6 +5,7 @@ import java.util.List;
 import com.cloudapps.practica2.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +22,7 @@ public class Username {
     private String email;
     
     @JsonIgnore
-    @OneToMany(mappedBy="username", orphanRemoval=true)
+    @OneToMany(mappedBy="username", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<Review> reviews;
 
     public Username(){

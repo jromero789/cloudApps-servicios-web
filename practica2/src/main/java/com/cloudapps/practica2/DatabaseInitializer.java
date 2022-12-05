@@ -55,7 +55,7 @@ public class DatabaseInitializer {
 
 		Review review11 = new Review("Comment1", 4, username1, book1);
 		reviewRepository.save(review11);
-		Review review12 = new Review("Comment2", 4, username2, book1);
+		Review review12 = new Review("Comment2", 4, username1, book2);
 		reviewRepository.save(review12);
 	}
 }
