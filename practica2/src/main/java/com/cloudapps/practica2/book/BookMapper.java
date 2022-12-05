@@ -1,16 +1,18 @@
 package com.cloudapps.practica2.book;
 
-import java.util.Collection;
-import java.util.List;
-
 import org.mapstruct.Mapper;
+import org.springframework.data.domain.Page;
 
 @Mapper(componentModel = "spring")
 public interface BookMapper {
 
     BookDTO toDTO(Book book);
 
-    List<BookDTO> toDTOs(Collection<Book> books);
+    BookDTO toDTOs(Book book);
+
+    default Page<BookDTO> toDTOs(Page<Book> page) {
+        return page.map(this::toDTOs);
+    }
 
     Book toDomain(BookDTO bookDTO);
 }

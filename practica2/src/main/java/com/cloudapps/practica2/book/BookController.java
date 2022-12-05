@@ -3,6 +3,8 @@ package com.cloudapps.practica2.book;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +23,10 @@ public class BookController {
 	private BookMapper mapper;
 
 	@GetMapping("/")
-	public Collection<BookDTO> getBooks() {
-		return mapper.toDTOs(bookService.findAll());
+	public Page<BookDTO> getBooks(Pageable page) {
+		return mapper.toDTOs(bookService.findAll(page));
+
+		
 	}
 
 	@GetMapping("/{id}")

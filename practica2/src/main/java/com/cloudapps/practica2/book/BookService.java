@@ -1,8 +1,9 @@
 package com.cloudapps.practica2.book;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
@@ -36,8 +37,8 @@ public class BookService {
 	}
 	
 
-	public Collection<Book> findAll() {
-		return bookRepository.findAll();
+	public Page<Book> findAll(Pageable page) {
+		return bookRepository.findAll(page);
 	}
 
     public Book findById(long id) {
