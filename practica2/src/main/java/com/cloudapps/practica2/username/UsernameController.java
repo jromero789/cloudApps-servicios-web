@@ -46,6 +46,10 @@ public class UsernameController {
 	@PostMapping("/")
 	public ResponseEntity<UsernameDTO> createPost(@RequestBody UsernameDTO usernameDTO) {
 
+		if(!usernameService.isValidEmail(usernameDTO)){
+			return ResponseEntity.status(500).body(null);
+		}
+		
 		Username username = usernameService.save(mapper.toDomain(usernameDTO));
 
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(username.getId()).toUri();

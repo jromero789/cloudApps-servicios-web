@@ -1,5 +1,8 @@
 package com.cloudapps.practica2.username;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,5 +32,15 @@ public class UsernameService {
 
 	public void deleteById(long id) {
 		this.usernameRepository.deleteById(id);
+	}
+
+	public boolean isValidEmail(UsernameDTO userDto){
+		String regex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(userDto.email());
+		if (!matcher.matches()) {
+			return false;
+		}
+		return true;
 	}
 }
