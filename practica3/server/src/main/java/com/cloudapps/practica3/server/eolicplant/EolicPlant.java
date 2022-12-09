@@ -18,6 +18,10 @@ public class EolicPlant {
 
     public EolicPlant() {
     }
+    
+    public EolicPlant(String name) {
+        this.name = name;
+    }
 
 
     public Long getId() {
