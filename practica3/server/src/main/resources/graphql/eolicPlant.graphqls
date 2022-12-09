@@ -1,0 +1,12 @@
+type EolicPlant {
+    id: ID!
+    name: String!
+}
+
+type Query {
+    getEolicPlants(count: Int): [EolicPlant]!
+}
+
+type Mutation {
+    createEolicPlant(name: String!) : EolicPlant!
+}
