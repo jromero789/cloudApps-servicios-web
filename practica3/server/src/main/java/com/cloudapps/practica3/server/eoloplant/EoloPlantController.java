@@ -1,4 +1,4 @@
-package com.cloudapps.practica3.server.eolicplant;
+package com.cloudapps.practica3.server.eoloplant;
 
 import java.util.List;
 
@@ -9,27 +9,27 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class EolicPlantController {
+public class EoloPlantController {
 
     @Autowired
-    private EolicPlantService eolicPlantService;
+    private EoloPlantService eolicPlantService;
     
     @QueryMapping
-    public List<EolicPlant> getEolicPlants() {
+    public List<EoloPlant> getEoloPlants() {
 		return eolicPlantService.findAll();
 	}
 
     @QueryMapping
-    public EolicPlant getEolicPlant(@Argument Long id) {
+    public EoloPlant getEoloPlant(@Argument Long id) {
         return eolicPlantService.findById(id);
     }
 
     @MutationMapping
-    public EolicPlant createEoloPlant(@Argument String city) {
-        EolicPlant eolicPlant = new EolicPlant();
-        eolicPlant.setCity(city);
-        eolicPlantService.save(eolicPlant);
+    public EoloPlant createEoloPlant(@Argument String city) {
+        EoloPlant eoloPlant = new EoloPlant();
+        eoloPlant.setCity(city);
+        eolicPlantService.save(eoloPlant);
 
-        return eolicPlant;
+        return eoloPlant;
     }
 }

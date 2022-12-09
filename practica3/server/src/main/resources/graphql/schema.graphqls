@@ -5,8 +5,8 @@ type EolicPlant {
 
 
 type Query {
-    getEolicPlants: [EolicPlant]! 
-    getEolicPlant(id: ID): EolicPlant!
+    getEoloPlants: [EolicPlant]! 
+    getEoloPlant(id: ID): EolicPlant!
 }
 
 type Mutation {

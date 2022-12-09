@@ -3,8 +3,8 @@ package com.cloudapps.practica3.server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cloudapps.practica3.server.eolicplant.EolicPlant;
-import com.cloudapps.practica3.server.eolicplant.EolicPlantRepository;
+import com.cloudapps.practica3.server.eoloplant.EoloPlant;
+import com.cloudapps.practica3.server.eoloplant.EoloPlantRepository;
 
 import jakarta.annotation.PostConstruct;
 
@@ -12,15 +12,15 @@ import jakarta.annotation.PostConstruct;
 public class DatabaseInitializer {
     
     @Autowired
-    private EolicPlantRepository eolicPlantRepository;
+    private EoloPlantRepository eolicPlantRepository;
 
     @PostConstruct
 	public void init() {
 
-		EolicPlant eolicPlant1 = new EolicPlant("Madrid");
-		eolicPlantRepository.save(eolicPlant1);
+		EoloPlant eoloPlant1 = new EoloPlant("Madrid");
+		eolicPlantRepository.save(eoloPlant1);
 
-		EolicPlant eolicPlant2 = new EolicPlant("Buenos Aires");
-		eolicPlantRepository.save(eolicPlant2);
+		EoloPlant eoloPlant2 = new EoloPlant("Buenos Aires");
+		eolicPlantRepository.save(eoloPlant2);
     }
 }

@@ -1,4 +1,4 @@
-package com.cloudapps.practica3.server.eolicplant;
+package com.cloudapps.practica3.server.eoloplant;
 
 
 import jakarta.persistence.Entity;
@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class EolicPlant {
+public class EoloPlant {
     
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,10 +17,10 @@ public class EolicPlant {
     private String planning;
 
 
-    public EolicPlant() {
+    public EoloPlant() {
     }
     
-    public EolicPlant(String city) {
+    public EoloPlant(String city) {
         this.city = city;
     }
 
