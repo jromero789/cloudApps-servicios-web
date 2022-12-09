@@ -15,14 +15,18 @@ public class EoloPlantService {
 		return eolicPlantRepository.findAll();
 	}
 
-    public EoloPlant findById(long id) {
-		return eolicPlantRepository.findById(id).orElseThrow();
-	}
-
     public EoloPlant save(EoloPlant eoloPlant) {
 
         // TODO: Add logic here
 
 		return eolicPlantRepository.save(eoloPlant);
+	}
+
+    public EoloPlant deleteById(long id) {
+
+        EoloPlant eoloPlant = eolicPlantRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Entity with id " + id + " does not exist"));
+        eolicPlantRepository.delete(eoloPlant);
+        return eoloPlant;
 	}
 }
