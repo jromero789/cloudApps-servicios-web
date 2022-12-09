@@ -15,21 +15,19 @@ public class EoloPlantController {
     private EoloPlantService eolicPlantService;
     
     @QueryMapping
-    public List<EoloPlant> getEoloPlants() {
+    public List<EoloPlant> eoloPlants() {
 		return eolicPlantService.findAll();
 	}
 
     @QueryMapping
-    public EoloPlant getEoloPlant(@Argument Long id) {
+    public EoloPlant eoloPlant(@Argument Long id) {
         return eolicPlantService.findById(id);
     }
 
     @MutationMapping
-    public EoloPlant createEoloPlant(@Argument String city) {
-        EoloPlant eoloPlant = new EoloPlant();
-        eoloPlant.setCity(city);
-        eolicPlantService.save(eoloPlant);
-
-        return eoloPlant;
+    public EoloPlant createEoloPlant(@Argument EoloPlantInput eoloPlant) {
+        String city = eoloPlant.getCity();
+        EoloPlant ep = new EoloPlant(city);
+        return eolicPlantService.save(ep);
     }
 }

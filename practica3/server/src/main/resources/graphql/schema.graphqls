@@ -1,14 +1,18 @@
-type EolicPlant {
+type EoloPlant {
     id: ID!
+    city: String!
+    planning: String
+}
+
+input EoloPlantInput {
     city: String!
 }
 
-
 type Query {
-    getEoloPlants: [EolicPlant]! 
-    getEoloPlant(id: ID): EolicPlant!
+    eoloPlants: [EoloPlant]! 
+    eoloPlant(id: ID): EoloPlant!
 }
 
 type Mutation {
-    createEoloPlant(city: String!) : EolicPlant!
+    createEoloPlant(eoloPlant: EoloPlantInput) : EoloPlant!
 }
