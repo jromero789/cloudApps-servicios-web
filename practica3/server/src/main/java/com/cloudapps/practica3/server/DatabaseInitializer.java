@@ -17,10 +17,10 @@ public class DatabaseInitializer {
     @PostConstruct
 	public void init() {
 
-		EolicPlant eolicPlant1 = new EolicPlant("Name1");
+		EolicPlant eolicPlant1 = new EolicPlant("Madrid");
 		eolicPlantRepository.save(eolicPlant1);
 
-		EolicPlant eolicPlant2 = new EolicPlant("Name2");
+		EolicPlant eolicPlant2 = new EolicPlant("Buenos Aires");
 		eolicPlantRepository.save(eolicPlant2);
     }
 }

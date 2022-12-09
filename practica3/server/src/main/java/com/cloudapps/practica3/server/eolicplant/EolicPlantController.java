@@ -25,9 +25,9 @@ public class EolicPlantController {
     }
 
     @MutationMapping
-    public EolicPlant createEolicPlant(@Argument String name) {
+    public EolicPlant createEoloPlant(@Argument String city) {
         EolicPlant eolicPlant = new EolicPlant();
-        eolicPlant.setName(name);
+        eolicPlant.setCity(city);
         eolicPlantService.save(eolicPlant);
 
         return eolicPlant;
