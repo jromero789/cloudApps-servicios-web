@@ -1,0 +1,32 @@
+package com.cloudapps.practica3.topo.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cloudapps.practica3.topo.model.ResponseDto;
+import com.cloudapps.practica3.topo.model.Topo;
+import com.cloudapps.practica3.topo.service.TopoService;
+
+@RestController
+@RequestMapping("/api/topographicdetails")
+public class TopoController {
+
+	@Autowired
+	private TopoService topos;
+
+	@GetMapping("/{city}")
+	public ResponseDto getPost(@PathVariable String city) {
+
+		topos.findByCity(city).orElseThrow();
+
+		return new ResponseDto();
+
+	}
+
+
+}
