@@ -20,13 +20,12 @@ public class TopoController {
 	private TopoService topos;
 
 	@GetMapping("/{city}")
-	public ResponseDto getPost(@PathVariable String city) {
+	public ResponseDto getTopo(@PathVariable String city) {
 
-		topos.findByCity(city).orElseThrow();
-
-		return new ResponseDto();
-
+		return topos.findByCity(city).map(this::toResponseDTO).orElseThrow();
 	}
 
-
+    private ResponseDto toResponseDTO(Topo topo) {
+        return new ResponseDto(topo.getId(), topo.getCity());
+    }
 }

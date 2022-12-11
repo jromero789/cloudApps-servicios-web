@@ -26,5 +26,9 @@ public class TopoService {
 	public Optional<Topo> findByCity(String city) {
 		return topos.findByCity(city);
 	}
+
+	public void deleteAll() {
+		topos.deleteAll();
+	}
 	
 }

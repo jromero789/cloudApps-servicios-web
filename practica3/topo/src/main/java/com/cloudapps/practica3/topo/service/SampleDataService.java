@@ -16,6 +16,8 @@ public class SampleDataService {
 	@PostConstruct
 	public void init() {
 
+		topos.deleteAll();
+		
 		topos.save(new Topo("Madrid", "flat" ));
 		topos.save(new Topo("Barcelona", "flat" ));
 		topos.save(new Topo("Jaca", "mountain" ));
