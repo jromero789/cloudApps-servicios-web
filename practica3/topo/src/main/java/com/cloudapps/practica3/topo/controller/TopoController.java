@@ -26,6 +26,6 @@ public class TopoController {
 	}
 
     private ResponseDto toResponseDTO(Topo topo) {
-        return new ResponseDto(topo.getId(), topo.getCity());
+        return new ResponseDto(topo.getId(), topo.getLandscape());
     }
 }
