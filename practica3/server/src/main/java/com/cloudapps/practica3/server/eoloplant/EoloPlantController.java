@@ -8,6 +8,9 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 @Controller
 public class EoloPlantController {
 
@@ -23,7 +26,11 @@ public class EoloPlantController {
     public EoloPlant createEoloPlant(@Argument EoloPlantInput eoloPlant) {
         String city = eoloPlant.getCity();
         EoloPlant ep = new EoloPlant(city);
-        return eolicPlantService.save(ep);
+        try {
+            return eolicPlantService.save(ep);
+        } catch (Exception e) {
+            return null; // TODO: Return appropiate error code
+        }
     }
 
     @MutationMapping
