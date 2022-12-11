@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package org.cloudapps.grpc;
+
+message WeatherRequest {
+    string city = 1;
+}
+
+message WeatherResponse {
+    string weatherType = 1;
+}
+
+service WeatherService {
+    rpc weather(WeatherRequest) returns (WeatherResponse);
+}
