@@ -1,9 +1,11 @@
 package org.cloudapps;
 
-import io.quarkus.grpc.GrpcService;
-import io.smallrye.mutiny.Uni;
 import org.cloudapps.grpc.*;
-    
+
+import io.quarkus.grpc.GrpcService;
+
+import io.smallrye.mutiny.Uni;
+
 @GrpcService
 public class WeatherGrpcService implements WeatherService {
 
