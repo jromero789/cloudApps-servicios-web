@@ -1,13 +1,13 @@
 package com.cloudapps.practica3.topo.repository;
 
-import java.util.Optional;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import com.cloudapps.practica3.topo.model.Topo;
 
-public interface TopoRepository extends MongoRepository<Topo, String> {
+import reactor.core.publisher.Flux;
 
-    Optional<Topo> findByCity(String city);
+public interface TopoRepository extends ReactiveMongoRepository<Topo, String> {
+
+    Flux<Topo> findByCity(String city);
 }
 

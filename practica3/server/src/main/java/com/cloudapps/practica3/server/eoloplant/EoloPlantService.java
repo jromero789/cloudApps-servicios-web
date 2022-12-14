@@ -24,7 +24,7 @@ public class EoloPlantService {
     public EoloPlant save(EoloPlant eoloPlant) throws JsonProcessingException {
 
         String city = eoloPlant.getCity();
-        String weather = "ToDo";
+        String weather = "getWeather()";
         String landscape = getTopo(city);
         eoloPlant.setPlanning(city + "-" + weather + "-" + landscape);
 

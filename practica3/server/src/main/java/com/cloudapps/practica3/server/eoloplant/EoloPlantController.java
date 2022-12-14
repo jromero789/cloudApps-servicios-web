@@ -26,7 +26,7 @@ public class EoloPlantController {
         try {
             return eolicPlantService.save(ep);
         } catch (Exception e) {
-            return null; // TODO: Return appropiate error code
+            return null;
         }
     }
 

@@ -26,7 +26,7 @@ public class TopoDto {
         return landscape;
     }
 
-    public void setTitle(String landscape) {
+    public void setLandscape(String landscape) {
         this.landscape = landscape;
     }
 
