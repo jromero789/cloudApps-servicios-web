@@ -2,21 +2,23 @@ package com.cloudapps.practica3.server.weather;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
-import net.devh.boot.grpc.client.inject.GrpcClient;
+import org.springframework.stereotype.Service;
 
-@Controller
-public class WeatherServiceGrpcClient implements CommandLineRunner {
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
-	@GrpcClient("weatherServer")
-	// private WeatherServiceBlockingStub client;
-	
-	@Override
-	public void run(String... args) throws Exception {
+@Service
+public class WeatherServiceGrpcClient {
+
+	ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090).usePlaintext().build();
+
+	// @Override
+	// public void run(String... args) throws Exception {
 		
-        // WeatherRequest request = WeatherRequest.newBuilder().setCity("Madrid").build();	        
-        // WeatherResponse response = client.hello(request);
+    //     // WeatherRequest request = WeatherRequest.newBuilder().setCity("Madrid").build();	        
+    //     // WeatherResponse response = client.hello(request);
 
-	    // System.out.println("Response received from server:\n" + response);
+	//     // System.out.println("Response received from server:\n" + response);
 
-	}	
+	// }	
 }
