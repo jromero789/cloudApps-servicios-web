@@ -39,10 +39,10 @@ public class Application {
     	};
     }
 	
-	@Bean
-	public Consumer<Client> consumer() {
-		return client -> {
-			System.out.println("Client: " + client);
-		};
-	}
+	//@Bean
+	//public Consumer<Client> consumer() {
+	//	return client -> {
+	//		System.out.println("Client: " + client);
+	//	};
+	//}
 }
