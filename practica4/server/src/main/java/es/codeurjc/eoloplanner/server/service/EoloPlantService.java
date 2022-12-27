@@ -1,47 +1,52 @@
 package es.codeurjc.eoloplanner.server.service;
 
-import es.codeurjc.eoloplanner.server.client.TopoClient;
-import es.codeurjc.eoloplanner.server.client.WeatherClient;
+import es.codeurjc.eoloplanner.server.Client;
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
 import es.codeurjc.eoloplanner.server.repository.EoloPlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 @Service
 public class EoloPlantService {
 
     @Autowired
-    private EoloPlantRepository eoloPlants;
+    private EoloPlantRepository eoloPlantRepository;
 
     @Autowired
-    private EoloPlantCreatorService eoloPlantCreator;
+    private StreamBridge streamBridge;
+
 
     public Collection<EoloPlant> findAll() {
-        return eoloPlants.findAll();
+        return eoloPlantRepository.findAll();
     }
 
     public Optional<EoloPlant> findById(long id) {
-        return eoloPlants.findById(id);
+        return eoloPlantRepository.findById(id);
     }
 
     public EoloPlant createEoloplant(EoloPlant eoloPlantCreationRequest) throws ExecutionException, InterruptedException {
 
-        EoloPlant eoloPlant = eoloPlantCreator.createEoloPlant(eoloPlantCreationRequest);
+        String city = eoloPlantCreationRequest.getCity();
+        EoloPlant eoloPlant = new EoloPlant(city);
+        eoloPlantRepository.save(eoloPlant);
 
-        eoloPlants.save(eoloPlant);
-
+        Client client = new Client("Create2", UUID.randomUUID().toString());
+        streamBridge.send("create", client);
+        
         return eoloPlant;
     }
 
     public EoloPlant deleteById(long id) {
 
-        EoloPlant eoloPlant = eoloPlants.findById(id).orElseThrow();
+        EoloPlant eoloPlant = eoloPlantRepository.findById(id).orElseThrow();
 
-        eoloPlants.deleteById(id);
+        eoloPlantRepository.deleteById(id);
 
         return eoloPlant;
     }

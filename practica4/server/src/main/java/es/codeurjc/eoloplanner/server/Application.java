@@ -19,6 +19,9 @@ package es.codeurjc.eoloplanner.server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
+
+import es.codeurjc.eoloplanner.server.model.EoloPlant;
+
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -32,12 +35,12 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@Bean
-    public Supplier<Client> createproducer() {
-    	return () -> {
-    		return new Client("Create", UUID.randomUUID().toString());
-    	};
-    }
+	//@Bean
+    //public Supplier<Client> createproducer() {
+    //		return () -> {
+    //		return new Client("Create", UUID.randomUUID().toString());
+    //	};
+    //}
 	
 	@Bean
 	public Consumer<Client> progressconsumer() {

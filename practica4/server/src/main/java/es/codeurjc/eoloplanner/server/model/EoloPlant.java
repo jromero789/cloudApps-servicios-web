@@ -15,6 +15,11 @@ public class EoloPlant {
 	private String city;
 	private String planning;
 
+	public EoloPlant(String city) {
+		this.city = city;
+		this.planning = "";
+	}
+
 	public EoloPlant(String city, String planning) {
 		this.city = city;
 		this.planning = planning;
