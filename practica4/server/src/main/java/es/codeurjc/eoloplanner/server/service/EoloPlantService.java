@@ -30,6 +30,7 @@ public class EoloPlantService {
 
     public EoloPlant createEoloplant(EoloPlant eoloPlant) {
 
+        eoloPlant.setPlanning("");
         eoloPlantRepository.save(eoloPlant);
 
         streamBridge.send("create", eoloPlant);
