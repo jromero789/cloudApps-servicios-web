@@ -1,6 +1,5 @@
 package es.codeurjc.eoloplanner.server.service;
 
-import es.codeurjc.eoloplanner.server.Client;
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
 import es.codeurjc.eoloplanner.server.repository.EoloPlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -30,16 +28,18 @@ public class EoloPlantService {
         return eoloPlantRepository.findById(id);
     }
 
-    public EoloPlant createEoloplant(EoloPlant eoloPlantCreationRequest) throws ExecutionException, InterruptedException {
+    public EoloPlant createEoloplant(EoloPlant eoloPlant) {
 
-        String city = eoloPlantCreationRequest.getCity();
-        EoloPlant eoloPlant = new EoloPlant(city);
         eoloPlantRepository.save(eoloPlant);
 
-        Client client = new Client("Create2", UUID.randomUUID().toString());
-        streamBridge.send("create", client);
+        streamBridge.send("create", eoloPlant);
         
         return eoloPlant;
+    }
+
+    public EoloPlant update(EoloPlant eoloPlant) {
+        
+        return eoloPlantRepository.save(eoloPlant);
     }
 
     public EoloPlant deleteById(long id) {

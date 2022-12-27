@@ -16,11 +16,13 @@
 
 package es.codeurjc.eoloplanner.server;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
+import es.codeurjc.eoloplanner.server.service.EoloPlantService;
 
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -30,6 +32,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableAsync
 public class Application {
+
+	@Autowired
+	private EoloPlantService eoloPlantService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -43,9 +48,11 @@ public class Application {
     //}
 	
 	@Bean
-	public Consumer<Client> progressconsumer() {
-		return client -> {
-			System.out.println("Progress: " + client);
+	public Consumer<EoloPlant> progressconsumer() {
+		return eoloPlant -> {
+			System.out.println("Progress: " + eoloPlant.getCity());
+			eoloPlantService.update(eoloPlant);
+			// TODO: Send to front
 		};
 	}
 }

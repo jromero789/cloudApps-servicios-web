@@ -16,10 +16,16 @@
 
 package es.codeurjc.eoloplanner.server;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
+
+import es.codeurjc.eoloplanner.server.model.EoloPlant;
+import es.codeurjc.eoloplanner.server.service.EoloPlantCreatorService;
+
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.springframework.context.annotation.Bean;
@@ -28,21 +34,31 @@ import org.springframework.context.annotation.Bean;
 @EnableAsync
 public class Application {
 
+	@Autowired
+	private EoloPlantCreatorService eoloPlantCreator;
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@Bean
-    public Supplier<Client> progressproducer() {
-    	return () -> {
-    		return new Client("Progress", UUID.randomUUID().toString());
-    	};
-    }
+	//@Bean
+    //public Supplier<EoloPlant> progressproducer() {
+    //	return () -> {
+    //		return new EoloPlant("Progress", UUID.randomUUID().toString());
+    //	};
+    //}
 	
 	@Bean
-	public Consumer<Client> createconsumer() {
-		return client -> {
-			System.out.println("Create: " + client);
+	public Consumer<EoloPlant> createconsumer() {
+		return eoloPlant -> {
+			System.out.println("Create: " + eoloPlant.getCity());
+			try {
+				eoloPlantCreator.createEoloPlant(eoloPlant);
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		};
 	}
 

@@ -30,11 +30,9 @@ public class EoloPlantService {
 
     public EoloPlant createEoloplant(EoloPlant eoloPlantCreationRequest) throws ExecutionException, InterruptedException {
 
-        EoloPlant eoloPlant = eoloPlantCreator.createEoloPlant(eoloPlantCreationRequest);
+        eoloPlantCreator.createEoloPlant(eoloPlantCreationRequest);
 
-        eoloPlants.save(eoloPlant);
-
-        return eoloPlant;
+        return null;
     }
 
     public EoloPlant deleteById(long id) {

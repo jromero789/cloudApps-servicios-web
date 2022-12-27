@@ -4,6 +4,7 @@ import es.codeurjc.eoloplanner.server.client.TopoClient;
 import es.codeurjc.eoloplanner.server.client.WeatherClient;
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -19,9 +20,13 @@ public class EoloPlantCreatorService {
     @Autowired
     private TopoClient topoClient;
 
-    public EoloPlant createEoloPlant(EoloPlant eoloPlantCreationRequest) throws ExecutionException, InterruptedException {
+    @Autowired
+    private StreamBridge streamBridge;
+    
 
-        String city = eoloPlantCreationRequest.getCity();
+    public void createEoloPlant(EoloPlant eoloPlant) throws ExecutionException, InterruptedException {
+
+        String city = eoloPlant.getCity();
 
         StringBuffer planningCreation = new StringBuffer(city);
 
@@ -47,7 +52,8 @@ public class EoloPlantCreatorService {
 
         simulateProcessWaiting();
 
-        return new EoloPlant(eoloPlantCreationRequest.getCity(), planning);
+        eoloPlant.setPlanning(planning);
+        streamBridge.send("progress", eoloPlant);
     }
 
     private void simulateProcessWaiting() {
