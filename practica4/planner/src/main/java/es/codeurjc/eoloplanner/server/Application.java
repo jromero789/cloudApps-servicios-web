@@ -32,17 +32,17 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	//@Bean
-    //public Supplier<Client> producer() {
-    //	return () -> {
-    //		return new Client(UUID.randomUUID().toString(), UUID.randomUUID().toString());
-    //	};
-    //}
+	@Bean
+    public Supplier<Client> progressproducer() {
+    	return () -> {
+    		return new Client("Progress", UUID.randomUUID().toString());
+    	};
+    }
 	
 	@Bean
-	public Consumer<Client> consumer() {
+	public Consumer<Client> createconsumer() {
 		return client -> {
-			System.out.println("Client: " + client);
+			System.out.println("Create: " + client);
 		};
 	}
 

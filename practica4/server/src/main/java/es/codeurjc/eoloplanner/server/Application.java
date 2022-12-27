@@ -33,16 +33,16 @@ public class Application {
 	}
 
 	@Bean
-    public Supplier<Client> producer() {
+    public Supplier<Client> createproducer() {
     	return () -> {
-    		return new Client(UUID.randomUUID().toString(), UUID.randomUUID().toString());
+    		return new Client("Create", UUID.randomUUID().toString());
     	};
     }
 	
-	//@Bean
-	//public Consumer<Client> consumer() {
-	//	return client -> {
-	//		System.out.println("Client: " + client);
-	//	};
-	//}
+	@Bean
+	public Consumer<Client> progressconsumer() {
+		return client -> {
+			System.out.println("Progress: " + client);
+		};
+	}
 }
