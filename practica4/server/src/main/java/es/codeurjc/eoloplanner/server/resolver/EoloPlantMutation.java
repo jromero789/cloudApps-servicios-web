@@ -5,10 +5,14 @@ import graphql.kickstart.tools.GraphQLMutationResolver;
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
 import es.codeurjc.eoloplanner.server.model.EoloPlantInput;
 import es.codeurjc.eoloplanner.server.repository.EoloPlantRepository;
+import es.codeurjc.eoloplanner.server.service.EoloPlantService;
 
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Component;
 
 
@@ -18,10 +22,14 @@ public class EoloPlantMutation implements GraphQLMutationResolver {
 	@Autowired
     private EoloPlantRepository eoloPlantRepository;
 
+	@Autowired
+    private EoloPlantService eoloPlants;
 
-    public EoloPlant createEoloPlant(EoloPlantInput input) {
-        EoloPlant eoloPlant = eoloPlantRepository.save(getEoloPlant(input));
-        return eoloPlant;
+
+	public EoloPlant createEoloPlant(@Argument EoloPlantInput input) {
+		
+        //EoloPlant eoloPlant = eoloPlantRepository.save(getEoloPlant(input));
+        return eoloPlants.createEoloplant(getEoloPlant(input));
     }
 
     private EoloPlant getEoloPlant(EoloPlantInput eoloPlantInput) {

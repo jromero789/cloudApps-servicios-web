@@ -16,7 +16,7 @@ type Query {
 }
 
 type Mutation {
-    createEoloPlant(eoloPlant: EoloPlantInput!): EoloPlant
+    createEoloPlant(eoloPlant: EoloPlantInput): EoloPlant
     updateEoloPlant(eoloPlant: EoloPlantInput!): EoloPlant
 }
 
