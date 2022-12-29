@@ -11,8 +11,8 @@ input EoloPlantInput {
 }
 
 type Query {
-    eoloPlant(id: ID): EoloPlant
     eoloPlants: [EoloPlant]
+    eoloPlant(id: ID): EoloPlant
 }
 
 type Mutation {
@@ -22,4 +22,5 @@ type Mutation {
 
 type Subscription {
     eoloPlants: [EoloPlant]
+    eoloPlant(id: ID): EoloPlant
 }
