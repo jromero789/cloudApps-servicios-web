@@ -2,6 +2,8 @@ package es.codeurjc.eoloplanner.server.resolver;
 
 import graphql.GraphQLException;
 import graphql.kickstart.tools.GraphQLSubscriptionResolver;
+import reactor.core.publisher.Flux;
+
 import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,10 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class EoloPlantSubscription implements GraphQLSubscriptionResolver {
 
+
+    @Autowired
+    private Flux<EoloPlant> eoloPlantEvents;
+
 	@Autowired
     private EoloPlantRepository eoloPlantRepository;
 
@@ -28,10 +34,12 @@ public class EoloPlantSubscription implements GraphQLSubscriptionResolver {
     }
 
     public Publisher<EoloPlant> eoloPlant(Long id) {
-        return subscriber -> Executors.newScheduledThreadPool(1).scheduleAtFixedRate(() -> {
-            Optional<EoloPlant> eoloPlant = eoloPlantRepository.findById(id);
-            if(eoloPlant.isPresent())
-                subscriber.onNext(eoloPlant.get());
-        }, 0, 1, TimeUnit.SECONDS);
+        return eoloPlantEvents;
+
+        //return subscriber -> Executors.newScheduledThreadPool(1).scheduleAtFixedRate(() -> {
+        //    Optional<EoloPlant> eoloPlant = eoloPlantRepository.findById(id);
+        //    if(eoloPlant.isPresent())
+        //        subscriber.onNext(eoloPlant.get());
+        //}, 0, 1, TimeUnit.SECONDS);
     }
 }

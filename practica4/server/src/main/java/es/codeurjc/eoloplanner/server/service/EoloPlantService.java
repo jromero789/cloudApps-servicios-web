@@ -2,6 +2,8 @@ package es.codeurjc.eoloplanner.server.service;
 
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
 import es.codeurjc.eoloplanner.server.repository.EoloPlantRepository;
+import reactor.core.publisher.Sinks.Many;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,10 @@ public class EoloPlantService {
     @Autowired
     private StreamBridge streamBridge;
 
+    @Autowired
+  	private Many<EoloPlant> eoloPlantSink;
+
+
 
     public Collection<EoloPlant> findAll() {
         return eoloPlantRepository.findAll();
@@ -34,6 +40,9 @@ public class EoloPlantService {
         eoloPlantRepository.save(eoloPlant);
 
         streamBridge.send("create", eoloPlant);
+
+        // TODO: Add next
+		eoloPlantSink.tryEmitNext(eoloPlant);
         
         return eoloPlant;
     }

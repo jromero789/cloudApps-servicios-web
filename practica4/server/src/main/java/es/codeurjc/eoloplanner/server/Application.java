@@ -23,6 +23,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
 import es.codeurjc.eoloplanner.server.service.EoloPlantService;
+import reactor.core.publisher.Sinks.Many;
 
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -35,6 +36,9 @@ public class Application {
 
 	@Autowired
 	private EoloPlantService eoloPlantService;
+
+	@Autowired
+  	private Many<EoloPlant> eoloPlantSink;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -53,6 +57,7 @@ public class Application {
 			System.out.println("Progress: " + eoloPlant.getCity());
 			eoloPlantService.update(eoloPlant);
 			// TODO: Send to front
+			eoloPlantSink.tryEmitNext(eoloPlant);
 		};
 	}
 }
