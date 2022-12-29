@@ -15,6 +15,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
 	WebSocketHandler handler;
 	
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(handler, "/notifications");
+		registry.addHandler(handler, "/eoloplants");
 	}
 }
