@@ -14,6 +14,7 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Sinks.Many;
 
 import org.reactivestreams.Publisher;
 
@@ -32,6 +33,9 @@ public class EoloPlantController {
     
     @Autowired
     private Flux<EoloPlant> eoloPlantEvents;
+
+    @Autowired
+  	private Many<EoloPlant> eoloPlantSink;
 
     @Autowired
     private EoloPlantRepository eoloPlantRepository;
@@ -57,7 +61,10 @@ public class EoloPlantController {
     @MutationMapping
 	public EoloPlant createEoloPlant(@Argument EoloPlantInput eoloPlantInput) {
 		
-        return eoloPlantRepository.save(getEoloPlant(eoloPlantInput));
+        EoloPlant eoloPlant = eoloPlantRepository.save(getEoloPlant(eoloPlantInput));
+
+        eoloPlantSink.tryEmitNext(eoloPlant);
+        return eoloPlant;
         // return eoloPlants.createEoloplant(getEoloPlant(input));
     }
 
@@ -82,9 +89,9 @@ public class EoloPlantController {
     }
 
     @SubscriptionMapping
-    public Publisher<EoloPlant> subscriptionEoloPlant(Long id) {
-        return eoloPlantEvents;
-
+    public Publisher<EoloPlant> subscriptionEoloPlant(@Argument Long id) {
+        return eoloPlantEvents
+            .filter(e -> e.getId() == id);
         //return subscriber -> Executors.newScheduledThreadPool(1).scheduleAtFixedRate(() -> {
         //    Optional<EoloPlant> eoloPlant = eoloPlantRepository.findById(id);
         //    if(eoloPlant.isPresent())
