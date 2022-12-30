@@ -16,11 +16,11 @@ type Query {
 }
 
 type Mutation {
-    createEoloPlant(eoloPlant: EoloPlantInput): EoloPlant
-    updateEoloPlant(eoloPlant: EoloPlantInput!): EoloPlant
+    createEoloPlant(eoloPlantInput: EoloPlantInput): EoloPlant
+    updateEoloPlant(eoloPlantInput: EoloPlantInput!): EoloPlant
 }
 
 type Subscription {
-    eoloPlants: [EoloPlant]
-    eoloPlant(id: ID): EoloPlant
+    subscriptionEoloPlants: [EoloPlant]
+    subscriptionEoloPlant(id: ID): EoloPlant
 }
