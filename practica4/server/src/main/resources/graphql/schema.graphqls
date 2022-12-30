@@ -18,6 +18,7 @@ type Query {
 type Mutation {
     createEoloPlant(eoloPlantInput: EoloPlantInput): EoloPlant
     updateEoloPlant(eoloPlantInput: EoloPlantInput!): EoloPlant
+    deleteEoloPlant(id: ID): EoloPlant
 }
 
 type Subscription {

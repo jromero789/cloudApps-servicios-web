@@ -3,19 +3,12 @@ package es.codeurjc.eoloplanner.server.resolver;
 import graphql.GraphQLException;
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
 import es.codeurjc.eoloplanner.server.model.EoloPlantInput;
-import es.codeurjc.eoloplanner.server.repository.EoloPlantRepository;
 import es.codeurjc.eoloplanner.server.service.EoloPlantService;
 
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
-import org.springframework.stereotype.Component;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Sinks.Many;
-
 import org.reactivestreams.Publisher;
 
 import java.util.List;
@@ -25,27 +18,17 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
 import org.springframework.stereotype.Controller;
 
-import java.util.Collection;
-
 
 @Controller
 public class EoloPlantController {
-    
-    @Autowired
-    private Flux<EoloPlant> eoloPlantEvents;
 
     @Autowired
-  	private Many<EoloPlant> eoloPlantSink;
+    private EoloPlantService eoloPlantService;
 
-    @Autowired
-    private EoloPlantRepository eoloPlantRepository;
-
-    @Autowired
-    private EoloPlantService eoloPlants;
 
     @QueryMapping
     public EoloPlant eoloPlant(@Argument Long id) {
-        Optional<EoloPlant> eoloPlant = eoloPlants.findById(id);
+        Optional<EoloPlant> eoloPlant = eoloPlantService.findById(id);
         if(eoloPlant.isPresent())
             return eoloPlant.get();
         throw new GraphQLException("EoloPlant does not exist");
@@ -53,56 +36,47 @@ public class EoloPlantController {
 
     @QueryMapping
 	public List<EoloPlant> eoloPlants() {
-		Collection collection = eoloPlants.findAll();
-		List<EoloPlant> list = (List<EoloPlant>) collection;
-		return list;
+		return eoloPlantService.findAll();
 	}
 
     @MutationMapping
 	public EoloPlant createEoloPlant(@Argument EoloPlantInput eoloPlantInput) {
-		
-        EoloPlant eoloPlant = eoloPlantRepository.save(getEoloPlant(eoloPlantInput));
-
-        eoloPlantSink.tryEmitNext(eoloPlant);
-        return eoloPlant;
-        // return eoloPlants.createEoloplant(getEoloPlant(input));
+        return eoloPlantService.create(getEoloPlant(eoloPlantInput));
     }
 
-
     @MutationMapping
-	public EoloPlant updateEoloPlant(EoloPlantInput eoloPlantInput) {
+	public EoloPlant updateEoloPlant(@Argument EoloPlantInput eoloPlantInput) {
         EoloPlant eoloPlant = getEoloPlant(eoloPlantInput);
-        Optional<EoloPlant> targetEoloPlant = eoloPlantRepository.findById(eoloPlant.getId());
+        Optional<EoloPlant> targetEoloPlant = eoloPlantService.findById(eoloPlant.getId());
         if(targetEoloPlant.isPresent()) {
-            return eoloPlantRepository.save(eoloPlant);
+            return eoloPlantService.update(eoloPlant);
         }
         throw new GraphQLException("EoloPlant id " + eoloPlant.getId() + " does not exist.");
     }
 
+    @MutationMapping
+	public EoloPlant deleteEoloPlant(@Argument Long id) {
+		return eoloPlantService.deleteById(id);
+	}
 
     @SubscriptionMapping
     public Publisher<List<EoloPlant>> subscriptionEoloPlants() {
+        // TODO: Remove poller. Useful for debug purposes
         return subscriber -> Executors.newScheduledThreadPool(1).scheduleAtFixedRate(() -> {
-            List<EoloPlant> people = (List<EoloPlant>) eoloPlantRepository.findAll();
+            List<EoloPlant> people = eoloPlantService.findAll();
             subscriber.onNext(people);
         }, 0, 1, TimeUnit.SECONDS);
     }
 
     @SubscriptionMapping
     public Publisher<EoloPlant> subscriptionEoloPlant(@Argument Long id) {
-        return eoloPlantEvents
-            .filter(e -> e.getId() == id);
-        //return subscriber -> Executors.newScheduledThreadPool(1).scheduleAtFixedRate(() -> {
-        //    Optional<EoloPlant> eoloPlant = eoloPlantRepository.findById(id);
-        //    if(eoloPlant.isPresent())
-        //        subscriber.onNext(eoloPlant.get());
-        //}, 0, 1, TimeUnit.SECONDS);
+        return eoloPlantService.subscriptionEoloPlant(id);
     }
-
 
 
     private EoloPlant getEoloPlant(EoloPlantInput eoloPlantInput) {
         EoloPlant eoloPlant = new EoloPlant();
+        eoloPlant.setId(eoloPlantInput.getId());
         eoloPlant.setCity(eoloPlantInput.getCity());
         eoloPlant.setPlanning(eoloPlantInput.getPlanning());
 

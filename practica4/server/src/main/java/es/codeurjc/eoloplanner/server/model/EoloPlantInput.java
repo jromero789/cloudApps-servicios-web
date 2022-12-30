@@ -7,11 +7,6 @@ public class EoloPlantInput {
 	private String planning;
 
     
-
-
-    public EoloPlantInput() {
-    }
-    
     public Long getId() {
         return id;
     }

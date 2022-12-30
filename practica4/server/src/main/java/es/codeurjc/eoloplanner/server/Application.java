@@ -23,11 +23,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
 import es.codeurjc.eoloplanner.server.service.EoloPlantService;
-import reactor.core.publisher.Sinks.Many;
-
-import java.util.UUID;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -37,27 +33,15 @@ public class Application {
 	@Autowired
 	private EoloPlantService eoloPlantService;
 
-	@Autowired
-  	private Many<EoloPlant> eoloPlantSink;
-
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-
-	//@Bean
-    //public Supplier<Client> createproducer() {
-    //		return () -> {
-    //		return new Client("Create", UUID.randomUUID().toString());
-    //	};
-    //}
 	
 	@Bean
 	public Consumer<EoloPlant> progressconsumer() {
 		return eoloPlant -> {
 			System.out.println("Progress: " + eoloPlant.getCity());
 			eoloPlantService.update(eoloPlant);
-			// TODO: Send to front
-			eoloPlantSink.tryEmitNext(eoloPlant);
 		};
 	}
 }
