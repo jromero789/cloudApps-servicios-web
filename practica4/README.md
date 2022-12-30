@@ -20,6 +20,8 @@ $ docker run --rm -d -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=eoloplant
 ```
 RabbitMQ
 
+Apple M1. GPRC 
+compile -Dos.arch=x86_64
 
 ## Ejecutar servicios
 

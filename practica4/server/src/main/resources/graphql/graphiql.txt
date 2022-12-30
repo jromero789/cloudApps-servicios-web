@@ -2,6 +2,8 @@ query eoloPlant {
   eoloPlant(id: 1) {
     id
     city
+    progress
+    completed
     planning
   }
 }
@@ -10,6 +12,8 @@ query eoloPlants {
   eoloPlants {
     id
     city
+    progress
+    completed
     planning
   }
 }
@@ -22,6 +26,8 @@ mutation create {
   {
     id
     city
+    progress
+    completed
     planning
   }
 }
@@ -35,6 +41,8 @@ mutation updateEoloPlant {
   {
     id
     city
+    progress
+    completed
     planning
   }
 }
@@ -43,22 +51,30 @@ mutation deleteEoloPlant {
   deleteEoloPlant(id: 1) {
     id
     city
+    progress
+    completed
     planning
   }
 }
 
-subscription subscriptionEoloPlants{subscriptionEoloPlants
+subscription subscriptionEoloPlants{
+  subscriptionEoloPlants
   {
     id
     city
+    progress
+    completed
     planning
   }
 }
 
-subscription subscriptionEoloPlant{subscriptionEoloPlant(id: 1)
+subscription subscriptionEoloPlant{
+  subscriptionEoloPlant(id: 1)
   {
     id
     city
+    progress
+    completed
     planning
   }
 }

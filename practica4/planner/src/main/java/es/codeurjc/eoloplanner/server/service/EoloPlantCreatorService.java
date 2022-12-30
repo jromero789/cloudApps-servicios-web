@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
+import java.io.EOFException;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -40,9 +41,16 @@ public class EoloPlantCreatorService {
             System.out.println("W");
             planningCreation.append("-");
             planningCreation.append(w);
-        });;
-
+        });
+        
+        // 25%
+        eoloPlant.setProgress(25);
+        sendUpdate(eoloPlant);
+        
+        // 75%
         CompletableFuture.allOf(weather, landscape).get();
+        eoloPlant.setProgress(75);
+        sendUpdate(eoloPlant);
 
         String planning = planningCreation.toString();
 
@@ -52,7 +60,14 @@ public class EoloPlantCreatorService {
 
         simulateProcessWaiting();
 
+        // 100%
         eoloPlant.setPlanning(planning);
+        eoloPlant.setCompleted(true);
+        eoloPlant.setProgress(100);
+        sendUpdate(eoloPlant);
+    }
+
+    private void sendUpdate(EoloPlant eoloPlant){
         streamBridge.send("progress", eoloPlant);
     }
 

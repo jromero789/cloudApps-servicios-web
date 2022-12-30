@@ -24,10 +24,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
 import es.codeurjc.eoloplanner.server.service.EoloPlantCreatorService;
 
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -41,12 +39,6 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	//@Bean
-    //public Supplier<EoloPlant> progressproducer() {
-    //	return () -> {
-    //		return new EoloPlant("Progress", UUID.randomUUID().toString());
-    //	};
-    //}
 	
 	@Bean
 	public Consumer<EoloPlant> createconsumer() {

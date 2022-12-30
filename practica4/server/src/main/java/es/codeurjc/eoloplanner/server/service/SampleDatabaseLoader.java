@@ -14,6 +14,6 @@ public class SampleDatabaseLoader {
 	
 	@PostConstruct
 	public void init() {
-		posts.save(new EoloPlant("Madrid", "madrid-sunny-flat"));
+		posts.save(new EoloPlant("Madrid"));
 	}
 }

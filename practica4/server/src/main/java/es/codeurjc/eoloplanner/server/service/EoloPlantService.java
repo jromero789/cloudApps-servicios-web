@@ -59,6 +59,8 @@ public class EoloPlantService {
 
         eoloPlantRepository.deleteById(id);
 
+        eoloPlantSink.tryEmitNext(eoloPlant);
+
         return eoloPlant;
     }
 

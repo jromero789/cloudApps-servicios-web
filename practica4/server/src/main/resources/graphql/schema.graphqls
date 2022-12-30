@@ -1,6 +1,8 @@
 type EoloPlant {
     id: ID
     city: String!
+    progress: Int
+    completed: Boolean
     planning: String
 }
 
