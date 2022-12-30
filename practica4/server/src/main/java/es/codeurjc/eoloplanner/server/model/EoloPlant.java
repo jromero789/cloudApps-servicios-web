@@ -17,16 +17,8 @@ public class EoloPlant {
 	private boolean completed;
 	private String planning;
 
-
-	public EoloPlant(String city) {
-		this.city = city;
-	}
-
 	public EoloPlant() {
-		// Jpa
 	}
-
-	
 
 	public Long getId() {
 		return id;

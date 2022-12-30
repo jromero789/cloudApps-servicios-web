@@ -1,4 +1,4 @@
-package es.codeurjc.eoloplanner.server.resolver;
+package es.codeurjc.eoloplanner.server.controller;
 
 import graphql.GraphQLException;
 import es.codeurjc.eoloplanner.server.model.EoloPlant;

@@ -14,6 +14,13 @@ public class SampleDatabaseLoader {
 	
 	@PostConstruct
 	public void init() {
-		posts.save(new EoloPlant("Madrid"));
+
+		EoloPlant eoloPlant = new EoloPlant();
+		eoloPlant.setCity("Madrid");
+		eoloPlant.setCompleted(true);
+		eoloPlant.setProgress(100);
+		eoloPlant.setPlanning("madrid-sunny-flat");
+
+		posts.save(eoloPlant);
 	}
 }
