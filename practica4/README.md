@@ -1,32 +1,30 @@
 # EoloPlanner
+- Master: CloudApps URJC
+- Módulo II. Servicios Web
+- 2.1 - Tecnologías de Servicios Web
+- Práctica 4 – Paso de mensajes y WebSockets
 
-Este proyecto es una aplicación distribuida formada por diferentes servicios que se comunican entre sí usando API REST y gRPC. La aplicación ofrece un interfaz web que se comunica con el servidor con GraphQL. 
+- Alumnos: Eduardo Larraz, Juan Romero González
+- Email: e.larraz.2022@alumnos.urjc.es, j.romero1.2016@alumnos.urjc.es
+- Fecha: 12/12/2022
 
-Algunos servicios están implementados con Node.js/Express y otros con Java/Spring. Estas tecnologías deben estar instaladas en el host para poder construir y ejecutar los servicios. También se requiere Docker para ejecutar los servicios auxiliares (MySQL y MongoDB).
+## Github práctica:
+- https://github.com/jromero789/cloudApps-servicios-web
 
-Para la construcción de los servicios y su ejecución, así como la ejecución de los servicios auxiliares requeridos se usan scripts implementados en Node.js. Posiblemente no sea el lenguaje de scripting más utilizado para este caso de uso, pero en este caso concreto facilita la interoperabilidad en varios SOs y es sencillo.
-
-## Iniciar servicios auxiliares: MongoDB y MySQL
+## Iniciar servicios auxiliares: MySQL, RabbitMQ
 
 Los servicios auxiliares se ejecutan con la tecnología de contenedores Docker usando el siguiente comando:
 
 ```
-$ docker run --rm -d -p 27017-27019:27017-27019 --name mongodb mongo
 $ docker run --rm -d -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=eoloplantsDB -p 3306:3306 --name mysql mysql:8.0.22
 ```
+RabbitMQ
 
-## Construir servicios
-
-Descarga las dependencias y construye los proyectos. En proyectos Java usa Maven. En proyectos Node usa NPM:
-
-```
-$ node build.js
-```
 
 ## Ejecutar servicios
 
-Ejecuta los servicios. En proyectos Java usa Maven. En proyectos Node usa esta tecnología directamente:
-
-```
-$ node exec.js
-```
+Servicios:
+- Server (http://localhost:8080/)
+- Planner
+- WeatherService
+- TopoService
