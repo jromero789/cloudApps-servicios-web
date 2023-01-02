@@ -34,8 +34,7 @@ async function createPlant() {
 async function createProgress(id) {
   (async () => {
     const onNext = (result) => {
-        console.log("Subscription data:", result);
-        const plantProgress = result.data.subscriptionEoloPlants[1];
+        const plantProgress = result.data.subscriptionEoloPlant;
         console.log("plantProgress:", plantProgress);
         createOrUpdatePlanView(plantProgress);
     };
@@ -43,15 +42,16 @@ async function createProgress(id) {
     await new Promise((resolve, reject) => {
         client.subscribe(
             {
-                query: `subscription {
-                  subscriptionEoloPlants {
+                query: `subscription($id: ID!) {
+                  subscriptionEoloPlant(id: $id) {
                     id
                     city
                     progress
                     completed
                     planning
                   }
-                }`
+                }`,
+                variables: {id}
             },
             {
                 next: onNext,
