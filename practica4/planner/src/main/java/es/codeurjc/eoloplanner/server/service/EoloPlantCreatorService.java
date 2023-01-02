@@ -5,6 +5,7 @@ import es.codeurjc.eoloplanner.server.client.WeatherClient;
 import es.codeurjc.eoloplanner.server.model.EoloPlant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.EOFException;
@@ -25,6 +26,7 @@ public class EoloPlantCreatorService {
     private StreamBridge streamBridge;
     
 
+    @Async
     public void createEoloPlant(EoloPlant eoloPlant) throws ExecutionException, InterruptedException {
 
         String city = eoloPlant.getCity();
@@ -42,7 +44,7 @@ public class EoloPlantCreatorService {
             planningCreation.append("-");
             planningCreation.append(w);
         });
-        
+
         // 25%
         eoloPlant.setProgress(25);
         sendUpdate(eoloPlant);
