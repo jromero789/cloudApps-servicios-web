@@ -33,9 +33,11 @@ async function createPlant() {
 
 async function createProgress(id) {
   (async () => {
-    const onNext = (data) => {
-        console.log("Subscription data:", data);
-        //createOrUpdatePlanView(plant);
+    const onNext = (result) => {
+        console.log("Subscription data:", result);
+        const plantProgress = result.data.subscriptionEoloPlants[1];
+        console.log("plantProgress:", plantProgress);
+        createOrUpdatePlanView(plantProgress);
     };
 
     await new Promise((resolve, reject) => {
