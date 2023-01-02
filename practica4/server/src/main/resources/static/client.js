@@ -1,39 +1,7 @@
-let socket = new WebSocket("ws://" + window.location.host + "/eoloplants");
+const client = graphqlWs.createClient({
+  url: 'ws://localhost:8080/graphql',
+});
 let userKey;
-
-socket.onmessage = function (event) {
-  console.log(`[message] Data received from server: ${event.data}`);
-  const data = JSON.parse(event.data);
-  if (data['user-key']) {
-    userKey = data['user-key'];
-    console.log('user-key', data['user-key'])
-    return;
-  }
-  if (data.completed) {
-    document.querySelector('#generate').disabled = false;
-    createOrUpdatePlanView(data);
-    return;
-  } else {
-    createOrUpdatePlanView({ ...data, planning: '...' });
-  }
-
-};
-
-socket.onopen = function (event) {
-  console.log(`[onconnect] event received from server:`, event);
-};
-
-socket.onclose = function (event) {
-  if (event.wasClean) {
-    console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-  } else {
-    console.log('[close] Connection died');
-  }
-};
-
-socket.onerror = function (error) {
-  console.log(`[error] ${error.message}`);
-};
 
 // Plant management functions
 async function createPlant() {
@@ -59,7 +27,40 @@ async function createPlant() {
 
   enableCreationButton();
 
+  createProgress(plant.id);
 }
+
+
+async function createProgress(id) {
+  (async () => {
+    const onNext = (data) => {
+        console.log("Subscription data:", data);
+        //createOrUpdatePlanView(plant);
+    };
+
+    await new Promise((resolve, reject) => {
+        client.subscribe(
+            {
+                query: `subscription {
+                  subscriptionEoloPlants {
+                    id
+                    city
+                    progress
+                    completed
+                    planning
+                  }
+                }`
+            },
+            {
+                next: onNext,
+                error: reject,
+                complete: resolve,
+            },
+        );
+    });
+  })();
+}
+
 
 async function getAllPlants() {
 
