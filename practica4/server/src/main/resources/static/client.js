@@ -42,14 +42,14 @@ async function createPlant() {
 
   disableCreationButton();
 
-  const query = `mutation($eoloPlant: EoloPlantInput) {
-    createEoloPlant(eoloPlant: $eoloPlant) {
+  const query = `mutation($eoloPlantInput: EoloPlantInput) {
+    createEoloPlant(eoloPlantInput: $eoloPlantInput) {
       id
       city
     }
   }`;
 
-  const response = await graphql(query, { eoloPlant: { city: city, userId: userKey }});
+  const response = await graphql(query, { eoloPlantInput: { city: city, userId: userKey }});
   console.log(response);
   const plant = await response.data.createEoloPlant;
 
