@@ -106,8 +106,6 @@ public class AuthController {
       });
     }
 
-    System.out.println("Creating user");
-    System.out.println(user);
     user.setRoles(roles);
     userRepository.save(user);
 
