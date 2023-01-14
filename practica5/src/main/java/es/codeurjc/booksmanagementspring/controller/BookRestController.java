@@ -1,6 +1,5 @@
 package es.codeurjc.booksmanagementspring.controller;
 
-import es.codeurjc.booksmanagementspring.dto.BookBasicDTO;
 import es.codeurjc.booksmanagementspring.dto.BookCreateDTO;
 import es.codeurjc.booksmanagementspring.dto.BookDTO;
 import es.codeurjc.booksmanagementspring.service.BookService;

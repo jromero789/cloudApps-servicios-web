@@ -3,7 +3,9 @@ package es.codeurjc.booksmanagementspring.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -14,12 +16,17 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy="username", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "username", cascade = CascadeType.REMOVE)
     List<Review> reviews;
 
-    public User(){}
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
-    public User(String nick, String email, String password){
+    public User() {
+    }
+
+    public User(String nick, String email, String password) {
         super();
         this.nick = nick;
         this.email = email;
@@ -65,6 +72,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

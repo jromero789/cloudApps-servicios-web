@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>es.codeurjc</groupId>
-    <artifactId>practica2</artifactId>
+    <artifactId>practica5</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>booksManagement-spring</name>
@@ -32,6 +32,15 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+<groupId>io.jsonwebtoken</groupId>
+<artifactId>jjwt</artifactId>
+<version>0.9.1</version>
+</dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

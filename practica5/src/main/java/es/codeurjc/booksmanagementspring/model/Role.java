@@ -3,7 +3,6 @@ package es.codeurjc.booksmanagementspring.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,14 +16,14 @@ public class DatabaseInitializer {
 
     private final UserRepository userRepository;
 
-    //private final RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     public DatabaseInitializer(BookRepository bookRepository, ReviewRepository reviewRepository,
-            UserRepository userRepository) {
+            UserRepository userRepository, RoleRepository roleRepository) {
         this.bookRepository = bookRepository;
         this.reviewRepository = reviewRepository;
         this.userRepository = userRepository;
-        //this.roleRepository = roleRepository;
+        this.roleRepository = roleRepository;
     }
 
     @PostConstruct
@@ -72,7 +72,7 @@ public class DatabaseInitializer {
         reviewRepository.save(review3);
         reviewRepository.save(review4);
 
-        // roleRepository.save(role1);
-        // roleRepository.save(role2);
+        roleRepository.save(role1);
+        roleRepository.save(role2);
     }
 }
