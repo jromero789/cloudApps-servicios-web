@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -81,6 +82,7 @@ public class ReviewRestController {
             @ApiResponse(responseCode = "404", description = "review not found",
                     content = @Content) })
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ReviewDTO> deleteReview(@PathVariable long id) {
         return ResponseEntity.ok(reviewService.delete(id));
     }

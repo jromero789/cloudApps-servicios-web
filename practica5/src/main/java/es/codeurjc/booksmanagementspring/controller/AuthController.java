@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +18,8 @@ import es.codeurjc.booksmanagementspring.repository.RoleRepository;
 import es.codeurjc.booksmanagementspring.repository.UserRepository;
 import es.codeurjc.booksmanagementspring.request.LoginRequest;
 import es.codeurjc.booksmanagementspring.request.SignupRequest;
+import es.codeurjc.booksmanagementspring.response.MessageResponse;
 import es.codeurjc.booksmanagementspring.security.UserDetailsImplementation;
-import jakarta.validation.Valid;
 
 import java.util.HashSet;
 import java.util.List;
@@ -46,7 +45,7 @@ public class AuthController {
   JwtUtils jwtUtils;
 
   @PostMapping("/signin")
-  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+  public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
     Authentication authentication = authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -54,9 +53,9 @@ public class AuthController {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String jwt = jwtUtils.generateJwtToken(authentication);
     
-    UserDetailsImplementation userDetails = (UserDetailsImplementation) authentication.getPrincipal();
+    UserDetailsImplementation userDetails = (UserDetailsImplementation) authentication.getPrincipal();    
     List<String> roles = userDetails.getAuthorities().stream()
-        .map(GrantedAuthority::getAuthority)
+        .map(item -> item.getAuthority())
         .collect(Collectors.toList());
 
     return ResponseEntity.ok(new JwtResponse(jwt,
@@ -67,17 +66,17 @@ public class AuthController {
   }
 
   @PostMapping("/signup")
-  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+  public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByNick(signUpRequest.getUsername())) {
       return ResponseEntity
           .badRequest()
-          .body("Error: Username is already taken!");
+          .body(new MessageResponse("Error: Username is already taken!"));
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
       return ResponseEntity
           .badRequest()
-          .body("Error: Email is already in use!");
+          .body(new MessageResponse("Error: Email is already in use!"));
     }
 
     // Create new user's account
@@ -94,13 +93,16 @@ public class AuthController {
       roles.add(userRole);
     } else {
       strRoles.forEach(role -> {
-        if ("admin".equals(role)) {
+        switch (role) {
+        case "admin":
           Role adminRole = roleRepository.findByName(ERoles.ROLE_ADMIN)
-                  .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(adminRole);
-        } else {
+
+          break;
+        default:
           Role userRole = roleRepository.findByName(ERoles.ROLE_USER)
-                  .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(userRole);
         }
       });
@@ -109,6 +111,6 @@ public class AuthController {
     user.setRoles(roles);
     userRepository.save(user);
 
-    return ResponseEntity.ok("User registered successfully!");
+    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
 }
