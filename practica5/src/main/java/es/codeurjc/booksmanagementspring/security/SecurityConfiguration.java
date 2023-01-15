@@ -56,7 +56,6 @@ public class SecurityConfiguration {
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .authorizeHttpRequests()
-          .requestMatchers("/api/auth/signup").permitAll() //Public
           .requestMatchers("/api/auth/**").permitAll() //Public
           .requestMatchers("/api/test/**").permitAll() //Public
         .anyRequest().authenticated(); //Private
