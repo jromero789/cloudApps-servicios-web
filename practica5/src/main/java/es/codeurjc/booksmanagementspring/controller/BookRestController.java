@@ -50,6 +50,7 @@ public class BookRestController {
             @ApiResponse(responseCode = "404", description = "Book not found",
                     content = @Content) })
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<BookDTO> getBookDetail(@PathVariable long id) {
         return ResponseEntity.ok(bookService.findByIdDTO(id));
     }
@@ -60,6 +61,7 @@ public class BookRestController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = BookDTO.class)) })})
     @PostMapping("/")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<BookDTO> createBook(@RequestBody BookCreateDTO bookCreateDTO) {
         BookDTO bookDTO = bookService.save(bookCreateDTO);
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(bookDTO.id()).toUri();
