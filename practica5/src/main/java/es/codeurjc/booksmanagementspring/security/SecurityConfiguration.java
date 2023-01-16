@@ -18,7 +18,6 @@ import es.codeurjc.booksmanagementspring.jwt.AuthTokenFilter;
 
 @Configuration
 @EnableMethodSecurity
-
 public class SecurityConfiguration {
   @Autowired
   UserDetailsServiceImplementation userDetailsService;
@@ -52,12 +51,13 @@ public class SecurityConfiguration {
   }
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.cors().and().csrf().disable()
+    http.csrf().disable()
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .authorizeHttpRequests()
           .requestMatchers("/api/auth/**").permitAll() //Public
-          .requestMatchers("/api/test/**").permitAll() //Public
+          .requestMatchers("/api/reviews/**").permitAll() //Public
+          .requestMatchers("/api/books/**").permitAll() //Public
         .anyRequest().authenticated(); //Private
     http.authenticationProvider(authenticationProvider());
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

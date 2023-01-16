@@ -76,6 +76,7 @@ public class BookRestController {
             @ApiResponse(responseCode = "404", description = "Book not found",
                     content = @Content) })
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<BookDTO> replaceBook(@RequestBody BookCreateDTO newBook, @PathVariable long id) {
         return ResponseEntity.ok(bookService.replace(newBook, id));
     }

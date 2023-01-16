@@ -34,6 +34,7 @@ public class ReviewRestController {
                     content = { @Content(mediaType = "application/json",
                             array = @ArraySchema( schema = @Schema(implementation = ReviewDTO.class))) })})
     @GetMapping("/")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<Page<ReviewDTO>> getReviews(Pageable pageable) {
         return ResponseEntity.ok(reviewService.findAll(pageable));
     }
@@ -72,6 +73,7 @@ public class ReviewRestController {
             @ApiResponse(responseCode = "404", description = "review not found",
                     content = @Content) })
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<ReviewDTO> replaceReview(@RequestBody ReviewCreateDTO reviewDTO, @PathVariable long id) {
         return ResponseEntity.ok(reviewService.replace(reviewDTO, id));
     }
