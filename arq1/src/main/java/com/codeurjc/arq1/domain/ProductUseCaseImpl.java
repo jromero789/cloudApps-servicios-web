@@ -21,4 +21,12 @@ public class ProductUseCaseImpl implements ProductUseCase {
         return productRepository.findAllProducts();
     }
     
+    public ProductDto createProduct(ProductDto product) {
+        return productRepository.createProduct(product);
+    }
+
+    // public ProductDto findProductById(long id){
+    //     Product product = this.productRepository.findById(id);
+
+    // }
 }

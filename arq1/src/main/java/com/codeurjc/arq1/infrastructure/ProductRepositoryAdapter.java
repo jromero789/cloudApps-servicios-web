@@ -1,12 +1,14 @@
 package com.codeurjc.arq1.infrastructure;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.dozer.Mapper;
 
 import com.codeurjc.arq1.domain.port.ProductDto;
 import com.codeurjc.arq1.domain.port.ProductRepository;
+import com.codeurjc.arq1.exceptions.ProductNotFoundException;
 import com.codeurjc.arq1.infrastructure.models.ProductEntity;
 import com.codeurjc.arq1.infrastructure.repositories.ProductJpaRepository;
 
@@ -29,4 +31,19 @@ public class ProductRepositoryAdapter implements ProductRepository {
 				.map(p -> mapper.map(p, ProductDto.class))
 				.collect(Collectors.toList());
     }
+
+    public ProductDto createProduct(ProductDto product) {
+        return product;
+    //     List<ProductEntity> products = productJpaRepository.findById();
+		
+	// 	return products
+	// 			.stream()
+	// 			.map(p -> mapper.map(p, ProductDto.class))
+	// 			.collect(Collectors.toList());
+    }
+
+    // public ProductDto findById(long id){
+    //     ProductEntity product = productJpaRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+
+    // }
 }

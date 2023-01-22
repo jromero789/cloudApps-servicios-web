@@ -5,4 +5,6 @@ import java.util.List;
 public interface ProductRepository {
     
     List<ProductDto> findAllProducts();
+    ProductDto createProduct(ProductDto product);
+    
 }
