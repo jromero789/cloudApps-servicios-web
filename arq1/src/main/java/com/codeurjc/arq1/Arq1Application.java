@@ -16,7 +16,7 @@ import com.codeurjc.arq1.infrastructure.repositories.ProductJpaRepository;
 
 @SpringBootApplication
 public class Arq1Application {
-
+    
 	public static void main(String[] args) {
 		SpringApplication.run(Arq1Application.class, args);
 	}
