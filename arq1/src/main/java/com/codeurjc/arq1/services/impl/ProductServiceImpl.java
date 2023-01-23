@@ -24,15 +24,34 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Collection<ProductResponseDto> findAll() {
-        return this.productUseCase.findAllProducts().stream()
+        return this.productUseCase.findAll().stream()
                 .map(product -> this.mapper.map(product, ProductResponseDto.class))
                 .collect(Collectors.toList());
     }
 
-    public ProductResponseDto createProduct(ProductRequestDto productRequestDto) {
-            // ProductEntity product = this.mapper.map(productRequestDto, ProductEntity.class);
-            //product = this.productUseCase.createProduct(product);
-            //return this.mapper.map(product, ProductResponseDto.class);
-            return null;
+    @Override
+    public ProductResponseDto findById(Long id) {
+        // TODO Auto-generated method stub
+        return null;
     }
+
+    @Override
+    public ProductResponseDto create(ProductRequestDto product) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ProductResponseDto updateStock(int stock) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ProductResponseDto delete(Long id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    
 }

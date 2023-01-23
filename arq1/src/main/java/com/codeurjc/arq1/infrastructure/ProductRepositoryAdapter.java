@@ -1,7 +1,6 @@
 package com.codeurjc.arq1.infrastructure;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.dozer.Mapper;
@@ -22,7 +21,7 @@ public class ProductRepositoryAdapter implements ProductRepository {
     }
 
     @Override
-    public List<ProductDto> findAllProducts() {
+    public List<ProductDto> findAll() {
         List<ProductEntity> products = productJpaRepository.findAll();
 		
 		return products
@@ -31,18 +30,26 @@ public class ProductRepositoryAdapter implements ProductRepository {
 				.collect(Collectors.toList());
     }
 
-    public ProductDto createProduct(ProductDto product) {
-        return product;
-    //     List<ProductEntity> products = productJpaRepository.findById();
-		
-	// 	return products
-	// 			.stream()
-	// 			.map(p -> mapper.map(p, ProductDto.class))
-	// 			.collect(Collectors.toList());
+    @Override
+    public ProductDto findById(Long id) {
+        ProductEntity productEntity = productJpaRepository.findById(id).orElseThrow();
+		return mapper.map(productEntity, ProductDto.class);
     }
 
-    // public ProductDto findById(long id){
-    //     ProductEntity product = productJpaRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+    @Override
+    public ProductDto create(ProductDto product) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-    // }
+    @Override
+    public ProductDto updateStock(int stock) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.productJpaRepository.deleteById(id);;
+    }
 }

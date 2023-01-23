@@ -8,5 +8,8 @@ import com.codeurjc.arq1.dtos.response.ProductResponseDto;
 public interface ProductService {
     
     Collection<ProductResponseDto> findAll();
-    ProductResponseDto createProduct(ProductRequestDto product);
+    ProductResponseDto findById(Long id);
+    ProductResponseDto create(ProductRequestDto product);
+    ProductResponseDto updateStock(int stock);
+    ProductResponseDto delete(Long id);
 }

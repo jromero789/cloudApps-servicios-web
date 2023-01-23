@@ -4,7 +4,9 @@ import java.util.List;
 
 public interface ProductRepository {
     
-    List<ProductDto> findAllProducts();
-    ProductDto createProduct(ProductDto product);
-    
+    List<ProductDto> findAll();
+    ProductDto findById(Long id);
+    ProductDto create(ProductDto product);
+    ProductDto updateStock(int stock);
+    void delete(Long id);
 }

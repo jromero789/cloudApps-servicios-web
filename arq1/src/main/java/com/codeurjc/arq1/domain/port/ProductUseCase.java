@@ -4,7 +4,11 @@ import java.util.Collection;
 
 public interface ProductUseCase {
 
-    public Collection<ProductDto> findAllProducts();
-    public ProductDto createProduct(ProductDto product);
+    public Collection<ProductDto> findAll();
+    public ProductDto findById(Long id);
+    public ProductDto create(ProductDto product);
+    public ProductDto updateStock(int stock);
+    public ProductDto delete(Long id);
+
     
 }

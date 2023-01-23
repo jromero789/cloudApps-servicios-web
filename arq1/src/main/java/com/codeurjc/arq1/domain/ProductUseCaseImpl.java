@@ -15,16 +15,32 @@ public class ProductUseCaseImpl implements ProductUseCase {
     }
 
     @Override
-    public Collection<ProductDto> findAllProducts() {
-        return productRepository.findAllProducts();
+    public Collection<ProductDto> findAll() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public ProductDto findById(Long id) {
+        return productRepository.findById(id);
+    }
+
+    @Override
+    public ProductDto create(ProductDto product) {
+        return productRepository.create(product);
+    }
+
+    @Override
+    public ProductDto updateStock(int stock) {
+        return productRepository.updateStock(stock);
+    }
+
+    @Override
+    public ProductDto delete(Long id) {
+        ProductDto product = productRepository.findById(id);
+        productRepository.delete(id);
+        return product;
     }
     
-    public ProductDto createProduct(ProductDto product) {
-        return productRepository.createProduct(product);
-    }
-
-    // public ProductDto findProductById(long id){
-    //     Product product = this.productRepository.findById(id);
-
-    // }
+    
+  
 }
