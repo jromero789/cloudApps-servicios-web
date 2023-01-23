@@ -10,7 +10,7 @@ import com.codeurjc.arq1.infrastructure.repositories.ShoppingCartJpaRepository;
 public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
 
     private ShoppingCartJpaRepository shoppingCartJpaRepository;
-	private Mapper mapper;
+    private Mapper mapper;
 
     public ShoppingCartRepositoryAdapter(ShoppingCartJpaRepository shoppingCartJpaRepository, Mapper mapper) {
         this.shoppingCartJpaRepository = shoppingCartJpaRepository;
@@ -20,18 +20,20 @@ public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
     @Override
     public ShoppingCartDto findById(Long id) {
         ShoppingCartEntity shoppingCartEntity = shoppingCartJpaRepository.findById(id).orElseThrow();
-		return null; //mapper.map(shoppingCartEntity, ShoppingCartDto.class);
+        return null; // mapper.map(shoppingCartEntity, ShoppingCartDto.class);
     }
 
     @Override
-    public ShoppingCartDto create(ShoppingCartDto shoppingCart) {
-        // TODO Auto-generated method stub
+    public ShoppingCartDto create(ShoppingCartDto shoppingCartDto) {
+        // ShoppingCartEntity shoppingCart = this.mapper.map(shoppingCartDto, ShoppingCartEntity.class);
+        // shoppingCart = this.shoppingCartJpaRepository.save(shoppingCart);
+        // return this.mapper.map(shoppingCart, ShoppingCartDto.class);
         return null;
     }
 
     @Override
     public void delete(Long id) {
-        this.shoppingCartJpaRepository.deleteById(id);;
+        this.shoppingCartJpaRepository.deleteById(id);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
 
     @Override
     public ShoppingCartDto addProductToShoppingCart(Long cart_id, Long prod_id, int prod_quantity) {
-        // TODO Auto-generated method stub
+        ShoppingCartEntity shoppingCartEntity = shoppingCartJpaRepository.findById(cart_id).orElseThrow();
         return null;
     }
 }

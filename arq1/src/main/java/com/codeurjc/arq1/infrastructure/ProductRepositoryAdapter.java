@@ -37,9 +37,10 @@ public class ProductRepositoryAdapter implements ProductRepository {
     }
 
     @Override
-    public ProductDto create(ProductDto product) {
-        // TODO Auto-generated method stub
-        return null;
+    public ProductDto create(ProductDto productDto) {
+        ProductEntity product = this.mapper.map(productDto, ProductEntity.class);
+        product = this.productJpaRepository.save(product);
+        return this.mapper.map(product, ProductDto.class);
     }
 
     @Override
@@ -50,6 +51,6 @@ public class ProductRepositoryAdapter implements ProductRepository {
 
     @Override
     public void delete(Long id) {
-        this.productJpaRepository.deleteById(id);;
+        this.productJpaRepository.deleteById(id);
     }
 }
