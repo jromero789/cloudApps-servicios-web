@@ -41,6 +41,4 @@ public class ProductUseCaseImpl implements ProductUseCase {
         return product;
     }
     
-    
-  
 }

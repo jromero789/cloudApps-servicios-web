@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.codeurjc.arq1.domain.ProductUseCaseImpl;
+import com.codeurjc.arq1.domain.ShoppingCartUseCaseImpl;
 import com.codeurjc.arq1.domain.port.ProductRepository;
 import com.codeurjc.arq1.domain.port.ProductUseCase;
+import com.codeurjc.arq1.domain.port.ShoppingCartRepository;
+import com.codeurjc.arq1.domain.port.ShoppingCartUseCase;
 import com.codeurjc.arq1.infrastructure.ProductRepositoryAdapter;
+import com.codeurjc.arq1.infrastructure.ShoppingCartRepositoryAdapter;
 import com.codeurjc.arq1.infrastructure.repositories.ProductJpaRepository;
+import com.codeurjc.arq1.infrastructure.repositories.ShoppingCartJpaRepository;
 
 @SpringBootApplication
 public class Arq1Application {
@@ -34,6 +39,16 @@ public class Arq1Application {
     @Bean
     public ProductUseCase productUseCase(ProductRepository productRepository) {
     	return new ProductUseCaseImpl(productRepository);
+    }
+
+    // @Bean
+    // public ShoppingCartRepository shoppingCartRepository(ShoppingCartJpaRepository shoppingCartJpaRepository, Mapper mapper) {
+    // 	return new ShoppingCartRepositoryAdapter(shoppingCartJpaRepository, mapper);
+    // }
+    
+    @Bean
+    public ShoppingCartUseCase shoppingCartUseCase(ShoppingCartRepository shoppingCartRepository) {
+    	return new ShoppingCartUseCaseImpl(shoppingCartRepository);
     }
 
 }
