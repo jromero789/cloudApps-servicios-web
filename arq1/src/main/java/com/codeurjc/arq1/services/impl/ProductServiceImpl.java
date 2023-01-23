@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.codeurjc.arq1.domain.port.ProductUseCase;
 import com.codeurjc.arq1.dtos.request.ProductRequestDto;
 import com.codeurjc.arq1.dtos.response.ProductResponseDto;
-import com.codeurjc.arq1.infrastructure.models.ProductEntity;
 import com.codeurjc.arq1.services.ProductService;
 
 @Service
@@ -31,8 +30,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public ProductResponseDto createProduct(ProductRequestDto productRequestDto) {
-            ProductEntity product = this.mapper.map(productRequestDto, ProductEntity.class);
+            // ProductEntity product = this.mapper.map(productRequestDto, ProductEntity.class);
             //product = this.productUseCase.createProduct(product);
-            return this.mapper.map(product, ProductResponseDto.class);
+            //return this.mapper.map(product, ProductResponseDto.class);
+            return null;
     }
 }

@@ -8,7 +8,6 @@ import org.dozer.Mapper;
 
 import com.codeurjc.arq1.domain.port.ProductDto;
 import com.codeurjc.arq1.domain.port.ProductRepository;
-import com.codeurjc.arq1.exceptions.ProductNotFoundException;
 import com.codeurjc.arq1.infrastructure.models.ProductEntity;
 import com.codeurjc.arq1.infrastructure.repositories.ProductJpaRepository;
 
