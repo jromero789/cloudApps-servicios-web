@@ -37,18 +37,17 @@ public class Arq1Application {
     }
     
     @Bean
-    public ProductUseCase productUseCase(ProductRepository productRepository) {
-    	return new ProductUseCaseImpl(productRepository);
+    public ProductUseCase productUseCase(ProductRepository productRepository, Mapper mapper) {
+    	return new ProductUseCaseImpl(productRepository, mapper);
     }
 
-    // @Bean
-    // public ShoppingCartRepository shoppingCartRepository(ShoppingCartJpaRepository shoppingCartJpaRepository, Mapper mapper) {
-    // 	return new ShoppingCartRepositoryAdapter(shoppingCartJpaRepository, mapper);
-    // }
-    
     @Bean
-    public ShoppingCartUseCase shoppingCartUseCase(ShoppingCartRepository shoppingCartRepository) {
-    	return new ShoppingCartUseCaseImpl(shoppingCartRepository);
+    public ShoppingCartRepository shoppingCartRepository(ShoppingCartJpaRepository shoppingCartJpaRepository, Mapper mapper) {
+        return new ShoppingCartRepositoryAdapter(shoppingCartJpaRepository, mapper);
     }
 
+    @Bean
+    public ShoppingCartUseCase shoppingCartUseCase(ShoppingCartRepository shoppingCartRepository, ProductRepository productRepository, Mapper mapper) {
+    	return new ShoppingCartUseCaseImpl(shoppingCartRepository, productRepository, mapper);
+    }
 }

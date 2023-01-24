@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Service;
 
+import com.codeurjc.arq1.domain.port.ProductDto;
 import com.codeurjc.arq1.domain.port.ProductUseCase;
 import com.codeurjc.arq1.dtos.request.ProductRequestDto;
 import com.codeurjc.arq1.dtos.response.ProductResponseDto;
@@ -31,26 +32,25 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto findById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        ProductDto product = this.productUseCase.findById(id);
+        return this.mapper.map(product, ProductResponseDto.class);
     }
 
     @Override
-    public ProductResponseDto create(ProductRequestDto product) {
-        // TODO Auto-generated method stub
-        return null;
+    public ProductResponseDto create(ProductRequestDto productRequestDto) {
+        ProductDto product = this.mapper.map(productRequestDto, ProductDto.class);
+        return this.mapper.map(this.productUseCase.create(product), ProductResponseDto.class);
     }
 
     @Override
-    public ProductResponseDto updateStock(int stock) {
-        // TODO Auto-generated method stub
-        return null;
+    public ProductResponseDto updateStock(Long id, int stock) {
+        return this.mapper.map(this.productUseCase.updateStock(id, stock), ProductResponseDto.class);
     }
 
     @Override
     public ProductResponseDto delete(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        ProductDto product = this.productUseCase.delete(id);
+        return this.mapper.map(product, ProductResponseDto.class);
     }
 
     

@@ -1,9 +1,11 @@
 package com.codeurjc.arq1.domain.port;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface ShoppingCartRepository {
+        List<ShoppingCartDto> findAll();
         ShoppingCartDto findById(Long id);
-        ShoppingCartDto create(ShoppingCartDto shoppingCart);
-        void delete(Long id);
-        ShoppingCartDto finishShoppingCart(Long id);
-        ShoppingCartDto addProductToShoppingCart(Long cart_id, Long prod_id, int prod_quantity );
+        ShoppingCartDto save(ShoppingCartDto shoppingCart);
+        Optional<ShoppingCartDto> delete(Long id);
 }

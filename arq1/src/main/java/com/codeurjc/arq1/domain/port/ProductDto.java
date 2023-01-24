@@ -2,6 +2,7 @@ package com.codeurjc.arq1.domain.port;
 
 public class ProductDto {
     
+    private Long id;
     private String brand;
     private String name;
     private int stock;
@@ -9,6 +10,7 @@ public class ProductDto {
     public ProductDto() {
     }
 
+    
     public String getBrand() {
         return brand;
     }
@@ -31,5 +33,15 @@ public class ProductDto {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -1,6 +1,7 @@
 package com.codeurjc.arq1.infrastructure;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.dozer.Mapper;
@@ -37,20 +38,18 @@ public class ProductRepositoryAdapter implements ProductRepository {
     }
 
     @Override
-    public ProductDto create(ProductDto productDto) {
-        ProductEntity product = this.mapper.map(productDto, ProductEntity.class);
-        product = this.productJpaRepository.save(product);
-        return this.mapper.map(product, ProductDto.class);
-    }
+	public ProductDto save(ProductDto product) {
+		
+		ProductEntity productEntity = mapper.map(product, ProductEntity.class);
+		ProductEntity savedProductEntity = productJpaRepository.save(productEntity);
+		
+		return mapper.map(savedProductEntity, ProductDto.class);
+	}
 
     @Override
-    public ProductDto updateStock(int stock) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    public Optional<ProductDto> delete(Long id) {
 
-    @Override
-    public void delete(Long id) {
-        this.productJpaRepository.deleteById(id);
+        Optional<ProductEntity> maybeAProduct = productJpaRepository.findById(id);		
+		return maybeAProduct.map(b -> mapper.map(b, ProductDto.class));
     }
 }

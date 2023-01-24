@@ -29,7 +29,7 @@ public class ProductController {
         return this.productService.findAll();
     }
 
-    @GetMapping("/{productId}")
+    @GetMapping("/{id}")
     public ProductResponseDto findById(Long id) {
         return this.productService.findById(id);
     }
@@ -39,12 +39,12 @@ public class ProductController {
         return this.productService.create(product);
     }
 
-    @PutMapping("/{productId}/stock/{quantity}")
-    public ProductResponseDto updateProductStock(int stock) {
-        return this.productService.updateStock(stock);
+    @PutMapping("/{id}/stock/{quantity}")
+    public ProductResponseDto updateProductStock(Long id, int quantity) {
+        return this.productService.updateStock(id, quantity);
     }
 
-    @DeleteMapping("/{productId}")
+    @DeleteMapping("/{id}")
     public ProductResponseDto delete(Long id) {
         return this.productService.delete(id);
     }

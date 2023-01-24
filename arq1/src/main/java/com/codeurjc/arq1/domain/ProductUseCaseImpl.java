@@ -2,6 +2,8 @@ package com.codeurjc.arq1.domain;
 
 import java.util.Collection;
 
+import org.dozer.Mapper;
+
 import com.codeurjc.arq1.domain.port.ProductDto;
 import com.codeurjc.arq1.domain.port.ProductRepository;
 import com.codeurjc.arq1.domain.port.ProductUseCase;
@@ -9,9 +11,11 @@ import com.codeurjc.arq1.domain.port.ProductUseCase;
 public class ProductUseCaseImpl implements ProductUseCase {
 
     ProductRepository productRepository;
+    private Mapper mapper;
 
-    public ProductUseCaseImpl(ProductRepository productRepository) {
+    public ProductUseCaseImpl(ProductRepository productRepository, Mapper mapper) {
         this.productRepository = productRepository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -26,12 +30,19 @@ public class ProductUseCaseImpl implements ProductUseCase {
 
     @Override
     public ProductDto create(ProductDto product) {
-        return productRepository.create(product);
+        return productRepository.save(product);
     }
 
     @Override
-    public ProductDto updateStock(int stock) {
-        return productRepository.updateStock(stock);
+    public ProductDto updateStock(Long id, int stock) {
+
+        ProductDto product = productRepository.findById(id);
+        
+        Product domainProduct = mapper.map(product, Product.class);
+        domainProduct.updateStock(stock);
+
+        ProductDto modifiedProductDto = mapper.map(domainProduct, ProductDto.class);
+        return productRepository.save(modifiedProductDto);
     }
 
     @Override

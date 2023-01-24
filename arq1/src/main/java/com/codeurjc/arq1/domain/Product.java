@@ -10,8 +10,8 @@ public class Product {
     public Product() {
     }
 
-    private void reduceStock(){
-        this.stock -= 1;
+    void updateStock(int stock){
+        this.stock = stock;
     }
 
     
