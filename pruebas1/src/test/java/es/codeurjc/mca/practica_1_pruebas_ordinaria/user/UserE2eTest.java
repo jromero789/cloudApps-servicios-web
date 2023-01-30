@@ -1,30 +1,13 @@
 package es.codeurjc.mca.practica_1_pruebas_ordinaria.user; 
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
 import io.restassured.RestAssured;
-
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 
-import org.springframework.boot.test.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserE2eTest {
@@ -41,9 +24,31 @@ public class UserE2eTest {
 
     @Test
     public void createUser() throws Exception {
+        given().
+			contentType("application/json").
+			body("{\"name\":\"nameOrganizer\" }").
+            auth().
+                basic("Patxi", "pass").
+		when().
+			post("/api/users/").
+		then().
+			statusCode(201);
+    
+        // TODO: Find why BAD_REQUEST. Check create organizer or client
     }
-
+    
     @Test
     public void deleteUser() throws Exception {
+
+        given().
+			contentType("application/json").
+			body("{\"name\":\"nameOrganizer\" }").
+            auth().
+                basic("Patxi", "pass").
+		when().
+			delete("/api/users/{id}", 1L).
+		then().
+			statusCode(201);
+        // TODO: Can't find 1L. Check delete organizer or client
     }
 }
