@@ -1,45 +1,39 @@
 package es.codeurjc.mca.practica_1_pruebas_ordinaria.event; 
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.Arrays;
-import java.util.List;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+import io.restassured.RestAssured;
+import static io.restassured.RestAssured.given;
+
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class EventE2eTest {
 
-    @Autowired
-    private MockMvc mvc;
+    @LocalServerPort
+    int port;
     
-    @MockBean
-    private EventService eventService;
-    
+    @BeforeEach
+        public void setUp() {
+        RestAssured.port = port;
+        RestAssured.useRelaxedHTTPSValidation();
+        RestAssured.baseURI = "https://localhost:"+port;
+    }
+
     @Test
-    public void getEventTest() throws Exception {
+    public void createEvent() throws Exception {
             
-        //List<Event> event = Arrays.asList(new Event("John"), new Event("Peter"));
-        
-        //when(eventService.getEvent()).thenReturn(event);
-        
-        mvc.perform(get("/event/")
-                    .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("$", hasSize(2)))
-                    .andExpect(jsonPath("$[0].name", equalTo("John")));
+        given().
+			contentType("application/json").
+			body("{\"description\":\"des0\",\"name\":\"name0\" }").
+            auth().
+                basic("Patxi", "pass").
+		when().
+			post("/api/events/").
+		then().
+			statusCode(201);
         
     }
 }
