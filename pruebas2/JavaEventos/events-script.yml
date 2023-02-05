@@ -1,0 +1,38 @@
+config:
+    target: "http://127.0.0.1:8080"
+    phases:
+      - duration: 20
+        arrivalRate: 10
+    payload:
+      path: "users.csv"
+      fields:
+        - "username"
+        - "password"
+scenarios:
+    - name: "Create event"
+    - flow:
+        - post:
+            url: "/api/events"
+            json:
+              multiparImage: ""
+              name: "Example"
+              description: "Example event"
+              date: "06/02/23"
+              price: "50"
+              max_capacity: "50" 
+            capture: 
+              json: "$.id"
+              as: "id"
+    - name: "Login users"
+    - flow:
+        - post:
+            url: "/api/logIn"
+            json:
+              username: "{{ username }}"
+              password: "{{ password }}"
+    - name: "Add users to event"
+    - flow:
+        - post:
+            url: "/api/tickets"
+            json:
+              id: "{{ id }}"
