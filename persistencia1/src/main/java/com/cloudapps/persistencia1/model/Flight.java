@@ -12,9 +12,13 @@ public class Flight {
 
     private String flightId;
     private String company;
-    private String airplane;
-    private String departure;
-    private String arrival;
+    @OneToOne
+    private Airplane airplane;
+    @OneToOne
+    private Airport departure;
+    @OneToOne
+    private Airport arrival;
+
     private Date date;
     private Float duration;
 
@@ -22,7 +26,7 @@ public class Flight {
 
 	}
 
-    public Flight(String flightId, String company, String airplane, String departure, String arrival, Date date, Float duration) {
+    public Flight(String flightId, String company, Airplane airplane, Airport departure, Airport arrival, Date date, Float duration) {
         super();
         this.flightId = flightId;
         this.company = company;
@@ -58,27 +62,27 @@ public class Flight {
         this.company = company;
     }
 
-    public String getAirplane() {
+    public Airplane getAirplane() {
         return airplane;
     }
 
-    public void setAirplane(String airplane) {
+    public void setAirplane(Airplane airplane) {
         this.airplane = airplane;
     }
 
-    public String getDeparture() {
+    public Airport getDeparture() {
         return departure;
     }
 
-    public void setDeparture(String departure) {
+    public void setDeparture(Airport departure) {
         this.departure = departure;
     }
 
-    public String getArrival() {
+    public Airport getArrival() {
         return arrival;
     }
 
-    public void setArrival(String arrival) {
+    public void setArrival(Airport arrival) {
         this.arrival = arrival;
     }
 

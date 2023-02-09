@@ -10,20 +10,23 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String airplane;
+    @OneToOne
+    private Airplane airplane;
     private Date dateInitial;
     private Date dateFinal;
     private Number hours;
-    private String mechanic;
+    @OneToOne
+    private Mechanic mechanic;
     private String type;
     private String description;
-    private String airport;
+    @OneToOne
+    private Airport airport;
 
     public Review() {
 
 	}
 
-    public Review(String airplane, Date dateInitial, Date dateFinal, Number hours, String mechanic, String type, String description, String airport) {
+    public Review(Airplane airplane, Date dateInitial, Date dateFinal, Number hours, Mechanic mechanic, String type, String description, Airport airport) {
         super();
         this.airplane = airplane;
         this.dateInitial = dateInitial;
@@ -44,12 +47,12 @@ public class Review {
         this.id = id;
     }
 
-    public String getAirplane() {
+    public Airplane getAirplane() {
         return airplane;
     }
 
-    public void setAirplane(String registration) {
-        this.airplane = registration;
+    public void setAirplane(Airplane airplane) {
+        this.airplane = airplane;
     }
 
     public Date getDateInitial() {
@@ -76,11 +79,11 @@ public class Review {
         this.hours = hours;
     }
 
-    public String getMechanic() {
+    public Mechanic getMechanic() {
         return mechanic;
     }
 
-    public void setMechanic(String mechanic) {
+    public void setMechanic(Mechanic mechanic) {
         this.mechanic = mechanic;
     }
 
@@ -100,11 +103,11 @@ public class Review {
         this.description = description;
     }
 
-    public String getAirpot() {
+    public Airport getAirpot() {
         return airport;
     }
 
-    public void setAirpot(String airport) {
+    public void setAirpot(Airport airport) {
         this.airport = airport;
     }
 }
