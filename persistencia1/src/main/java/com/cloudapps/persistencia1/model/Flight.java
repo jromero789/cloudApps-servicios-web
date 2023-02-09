@@ -101,4 +101,13 @@ public class Flight {
     public void setDuration(Float duration) {
         this.duration = duration;
     }
+
+    @Override
+    public String toString() {
+        return "Flight [id=" + id + ", flightId=" + flightId + ", company=" + company + ", airplane=" + airplane
+                + ", departure=" + departure + ", arrival=" + arrival + ", date=" + date + ", duration=" + duration
+                + "]";
+    }
+
+    
 }

@@ -17,16 +17,21 @@ public class Review {
     private Number hours;
     @OneToOne
     private Mechanic mechanic;
-    private String type;
+    private Type type;
     private String description;
     @OneToOne
     private Airport airport;
+
+    public enum Type{
+        SCHEDULED,
+        REPAIR
+    }
 
     public Review() {
 
 	}
 
-    public Review(Airplane airplane, Date dateInitial, Date dateFinal, Number hours, Mechanic mechanic, String type, String description, Airport airport) {
+    public Review(Airplane airplane, Date dateInitial, Date dateFinal, Number hours, Mechanic mechanic, Type type, String description, Airport airport) {
         super();
         this.airplane = airplane;
         this.dateInitial = dateInitial;
@@ -87,11 +92,11 @@ public class Review {
         this.mechanic = mechanic;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 

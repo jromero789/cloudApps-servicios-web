@@ -14,13 +14,19 @@ public class Mechanic {
     private String surname;
     private String company;
     private Number yearJoining;
-    private String training;
+    private Training training;
+
+    public enum Training{
+        GRADO,
+        FP,
+        SUPERIOR
+    }
 
     public Mechanic() {
 
 	}
 
-    public Mechanic(String employeeId, String name, String surname, String company, Number yearJoining, String training) {
+    public Mechanic(String employeeId, String name, String surname, String company, Number yearJoining, Training training) {
         super();
         this.employeeId = employeeId;
         this.name = name;
@@ -79,11 +85,11 @@ public class Mechanic {
         this.yearJoining = yearJoining;
     }
 
-    public String getTraining() {
+    public Training getTraining() {
         return training;
     }
 
-    public void setTraining(String training) {
+    public void setTraining(Training training) {
         this.training = training;
     }
 }

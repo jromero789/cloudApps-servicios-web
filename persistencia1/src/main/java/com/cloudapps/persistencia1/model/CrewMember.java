@@ -10,14 +10,20 @@ public class CrewMember {
     private String employeeId;
     private String name;
     private String surname;
-    private String position;
+    private Position position;
     private String company;
+
+    public enum Position{
+        COMANDANTE,
+        COPILOTO,
+        SOBRECARGO
+    }
 
     public CrewMember() {
 
 	}
 
-    public CrewMember(String employeeId, String name, String surname, String position, String company) {
+    public CrewMember(String employeeId, String name, String surname, Position position, String company) {
         super();
         this.employeeId = employeeId;
         this.name = name;
@@ -59,11 +65,11 @@ public class CrewMember {
         this.surname = surname;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
@@ -74,4 +80,12 @@ public class CrewMember {
     public void setCompany(String company) {
         this.company = company;
     }
+
+    @Override
+    public String toString() {
+        return "CrewMember [id=" + id + ", employeeId=" + employeeId + ", name=" + name + ", surname=" + surname
+                + ", position=" + position + ", company=" + company + "]";
+    }
+
+    
 }

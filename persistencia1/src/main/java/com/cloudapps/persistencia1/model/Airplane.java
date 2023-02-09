@@ -66,4 +66,12 @@ public class Airplane {
     public void setFlightHours(Number flightHours) {
         this.flightHours = flightHours;
     }
+
+    @Override
+    public String toString() {
+        return "Airplane [id=" + id + ", registration=" + registration + ", manufacturer=" + manufacturer + ", model="
+                + model + ", flightHours=" + flightHours + "]";
+    }
+
+    
 }
