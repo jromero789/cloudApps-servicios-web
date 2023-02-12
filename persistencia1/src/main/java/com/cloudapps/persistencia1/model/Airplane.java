@@ -1,5 +1,7 @@
 package com.cloudapps.persistencia1.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,16 +16,20 @@ public class Airplane {
     private String model;
     private Number flightHours;
 
+    @OneToMany
+    private List<Review> reviews;
+
     public Airplane() {
 
 	}
 
-    public Airplane(String registration, String manufacturer, String model, Number flightHours) {
+    public Airplane(String registration, String manufacturer, String model, Number flightHours, List<Review> reviews) {
         super();
         this.registration = registration;
         this.manufacturer = manufacturer;
         this.model = model;
         this.flightHours = flightHours;
+        this.reviews = reviews;
     }
 
 
@@ -67,11 +73,20 @@ public class Airplane {
         this.flightHours = flightHours;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     @Override
     public String toString() {
         return "Airplane [id=" + id + ", registration=" + registration + ", manufacturer=" + manufacturer + ", model="
-                + model + ", flightHours=" + flightHours + "]";
+                + model + ", flightHours=" + flightHours + ", reviews=" + reviews + "]";
     }
 
+    
     
 }

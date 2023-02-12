@@ -1,6 +1,7 @@
 package com.cloudapps.persistencia1.model;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -22,11 +23,14 @@ public class Flight {
     private Date date;
     private Float duration;
 
+    @ManyToMany
+    private List<CrewMember> crewMembers;
+
     public Flight() {
 
 	}
 
-    public Flight(String flightId, String company, Airplane airplane, Airport departure, Airport arrival, Date date, Float duration) {
+    public Flight(String flightId, String company, Airplane airplane, Airport departure, Airport arrival, Date date, Float duration, List<CrewMember> crewMembers) {
         super();
         this.flightId = flightId;
         this.company = company;
@@ -35,6 +39,7 @@ public class Flight {
         this.arrival = arrival;
         this.date = date;
         this.duration = duration;
+        this.crewMembers = crewMembers;
     }
 
 
@@ -102,12 +107,19 @@ public class Flight {
         this.duration = duration;
     }
 
+    public List<CrewMember> getCrewMembers() {
+        return crewMembers;
+    }
+
+    public void setCrewMembers(List<CrewMember> crewMembers) {
+        this.crewMembers = crewMembers;
+    }
+
     @Override
     public String toString() {
         return "Flight [id=" + id + ", flightId=" + flightId + ", company=" + company + ", airplane=" + airplane
                 + ", departure=" + departure + ", arrival=" + arrival + ", date=" + date + ", duration=" + duration
-                + "]";
+                + ", crewMembers=" + crewMembers + "]";
     }
-
     
 }

@@ -1,5 +1,7 @@
 package com.cloudapps.persistencia1.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +15,10 @@ public class CrewMember {
     private Position position;
     private String company;
 
+    @ManyToMany
+    private List<Flight> flights;
+
+
     public enum Position{
         COMANDANTE,
         COPILOTO,
@@ -23,13 +29,14 @@ public class CrewMember {
 
 	}
 
-    public CrewMember(String employeeId, String name, String surname, Position position, String company) {
+    public CrewMember(String employeeId, String name, String surname, Position position, String company, List<Flight> flights) {
         super();
         this.employeeId = employeeId;
         this.name = name;
         this.surname = surname;
         this.position = position;
         this.company = company;
+        this.flights = flights;
     }
 
 
@@ -81,11 +88,17 @@ public class CrewMember {
         this.company = company;
     }
 
+    public List<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(List<Flight> flights) {
+        this.flights = flights;
+    }
+
     @Override
     public String toString() {
         return "CrewMember [id=" + id + ", employeeId=" + employeeId + ", name=" + name + ", surname=" + surname
-                + ", position=" + position + ", company=" + company + "]";
+                + ", position=" + position + ", company=" + company + ", flights=" + flights + "]";
     }
-
-    
 }
