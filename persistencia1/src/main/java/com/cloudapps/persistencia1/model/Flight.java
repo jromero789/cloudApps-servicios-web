@@ -23,7 +23,7 @@ public class Flight {
     private Date date;
     private Float duration;
 
-    @ManyToMany
+    @ManyToMany(mappedBy="flights")
     private List<CrewMember> crewMembers;
 
     public Flight() {
@@ -113,13 +113,6 @@ public class Flight {
 
     public void setCrewMembers(List<CrewMember> crewMembers) {
         this.crewMembers = crewMembers;
-    }
-
-    @Override
-    public String toString() {
-        return "Flight [id=" + id + ", flightId=" + flightId + ", company=" + company + ", airplane=" + airplane
-                + ", departure=" + departure + ", arrival=" + arrival + ", date=" + date + ", duration=" + duration
-                + ", crewMembers=" + crewMembers + "]";
     }
     
 }

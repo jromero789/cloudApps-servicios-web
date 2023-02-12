@@ -15,7 +15,7 @@ public class CrewMember {
     private Position position;
     private String company;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Flight> flights;
 
 
@@ -96,9 +96,5 @@ public class CrewMember {
         this.flights = flights;
     }
 
-    @Override
-    public String toString() {
-        return "CrewMember [id=" + id + ", employeeId=" + employeeId + ", name=" + name + ", surname=" + surname
-                + ", position=" + position + ", company=" + company + ", flights=" + flights + "]";
-    }
+
 }

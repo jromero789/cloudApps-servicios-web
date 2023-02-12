@@ -16,7 +16,7 @@ public class Airplane {
     private String model;
     private Number flightHours;
 
-    @OneToMany
+    @OneToMany(mappedBy="airplane", fetch = FetchType.EAGER)
     private List<Review> reviews;
 
     public Airplane() {
@@ -79,12 +79,6 @@ public class Airplane {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
-    }
-
-    @Override
-    public String toString() {
-        return "Airplane [id=" + id + ", registration=" + registration + ", manufacturer=" + manufacturer + ", model="
-                + model + ", flightHours=" + flightHours + ", reviews=" + reviews + "]";
     }
 
     
