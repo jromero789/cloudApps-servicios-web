@@ -38,10 +38,10 @@
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
 
-<!-- Flyway -->
-    <dependency> 
-      <groupId>org.flywaydb</groupId> 
-      <artifactId>flyway-core</artifactId>
+    <!-- Flyway -->
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-mysql</artifactId>
     </dependency>
   </dependencies>
 
@@ -87,6 +87,7 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+
       </plugins>
     </pluginManagement>
   </build>
